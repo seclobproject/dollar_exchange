@@ -1,18 +1,35 @@
-import React from 'react'
-import HeroImg from '../../assets/Images/HeroImg.png'
+import React from "react";
+import HeroImg from "../../assets/images/HeroImg.png";
+
 function Hero() {
   return (
-    <div className='flex flex-row justify-end items-start relative '>
-      <div className='flex flex-col absolute top-0 left-0  z-10 text-start'>
-        <p className='text-2xl text-gradient-to-r from-blue-300 via-purple-500 to-pink-500 '>Maximize Your Value With Fast, Secure, And Accurate</p>
-        <p className='text-base text-white'>We provide real-time exchange rates, transparent processes, and reliable service. Convert USDT to AED or AED to USDT</p>
-        <button className='bg-blue text-white px-4 py-4'>signup</button>
-        <button className='bg-blue text-white px-4 py-4'>getStarted</button>
+    <div className="flex flex-row justify-end items-start relative font-poppins">
+      <div className="flex flex-col absolute top-0 left-0 z-10 text-start p-4 space-y-5 mt-2 sm:mt-4">
+        <p className="lg:text-[56px]  md:text-[48px] sm:text-[40px] text-xl bg-clip-text text-transparent bg-custom-gradient font-bold leading-tight flex flex-col gap-y-0 md:gap-y-2 lg:gap-y-3">
+          Maximize Your Value
+          <span className="block">With Fast, Secure, And</span>
+          <span className="block">Accurate</span>
+        </p>
+        <p className=" text-white md:text-2xl text-[10px] flex flex-col gap-y-1">
+          We provide real-time exchange rates, transparent processes,
+          <span>and reliable service. Convert USDT to AED or AED to USDT.</span>
+        </p>
+        <div className="flex space-x-4">
+          <button className="bg-custom-gradient rounded-lg p-[1px] sm:p-[2px] ease-in hover:scale-90">
+            <span className="flex text-xs sm:text-sm md:text-base w-full  bg-custom-blue text-white rounded-md px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-3">
+              Sign Up
+            </span>
+          </button>
+          <button className="bg-custom-gradient rounded-lg p-[1px] sm:p-[2px] ease-in hover:scale-90 ">
+            <span className="flex text-xs sm:text-sm md:text-base w-full bg-custom-blue text-white rounded-md px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-3">
+              Get Started
+            </span>
+          </button>{" "}
+        </div>
       </div>
-      <img src={HeroImg} className='relative ' alt="" />
+      <img src={HeroImg} className="relative" alt="Hero" />
     </div>
-  )
+  );
 }
 
-
-export default Hero
+export default Hero;

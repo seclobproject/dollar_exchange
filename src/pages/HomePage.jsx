@@ -1,13 +1,16 @@
-import React from 'react'
-import Header from '../components/HomePage/Header'
-import Hero from '../components/HomePage/Hero'
+import React from "react";
+import Header from "../components/homePage/Header";
+import Hero from "../components/homePage/Hero";
 function HomePage() {
   return (
-    <div className='bg-custom-blue'>
-      <Header/>
-      <Hero/>
+    <div className="bg-custom-blue">
+      <Header />
+      <div className="lg:pl-20 md:pl-10 pl-4">
+      <Hero />
+
+      </div>
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

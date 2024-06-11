@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import logo from "../../assets/Images/logo.png";
-import userImg from "../../assets/Images/userImg.png";
+import logo from "../../assets/images/logo.png";
+import userImg from "../../assets/images/userImg.png";
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -34,7 +34,9 @@ function Header() {
             <div className="flex items-center lg:order-2">
               <div className="flex flex-row items-center gap-x-3 sm:gap-x-2">
                 <img src={userImg} alt="" />
-                <p className="text-white md:text-xl sm:text-base text-sm">James</p>
+                <p className="text-white md:text-xl sm:text-base text-sm">
+                  James
+                </p>
               </div>
               <button
                 onClick={toggleMenu}

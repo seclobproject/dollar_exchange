@@ -1,3 +1,4 @@
+// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -9,8 +10,13 @@ export default {
       colors: {
         'custom-blue': '#000023',
       },
+      backgroundImage: {
+        'custom-gradient': 'linear-gradient(90deg, #5FD8FF 0%, #9969FF 50%, #FF4B4B 100%)',
+      },
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+      },
     },
   },
   plugins: [],
 }
-
