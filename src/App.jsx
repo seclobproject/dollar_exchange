@@ -1,13 +1,19 @@
-import React from 'react'
-import Header from './components/Header'
-import Hero from './components/Hero'
+import React from "react";
+import HomePage from "./pages/HomePage";
+import SignUpPage from "./pages/SignUp";
+import ForgotPasswordPage from "./pages/ForgotPassword";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
   return (
-    <div className='bg-custom-blue'>
-    <Header/>
-    <Hero/>
-    </div>
-  )
+    <Router>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+    
+    </Routes>
+  </Router>
+  );
 }
 
-export default App
+export default App;
