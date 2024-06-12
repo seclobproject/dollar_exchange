@@ -8,15 +8,16 @@ import Login from "./pages/Login";
 import '@fortawesome/fontawesome-free/css/all.css';
 function App() {
   return (
+
     <Router>
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      </Routes>
+    </Router>
+
     
-    </Routes>
-  </Router>
   );
 }
 
