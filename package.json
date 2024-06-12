@@ -10,12 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
 
-    "@tailwindcss/line-clamp": "^0.4.4",
-
->>>>>>> 702106d7702a3fcf3a83d9a5fee35b05d8312677
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0",

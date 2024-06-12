@@ -9,6 +9,7 @@ export default {
     extend: {
       colors: {
         'custom-blue': '#000023',
+        'table-color':'#26273B'
       },
       backgroundImage: {
         'custom-gradient': 'linear-gradient(90deg, #5FD8FF 0%, #9969FF 50%, #FF4B4B 100%)',
@@ -19,6 +20,7 @@ export default {
       screens: {
         'xs': '500px', 
       },
+
     },
   },
   plugins: [],
