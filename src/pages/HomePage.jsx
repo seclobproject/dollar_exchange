@@ -5,6 +5,7 @@ import OfferSlider from "../components/homePage/OfferSlider";
 import Details from "../components/homePage/Details";
 import CryptoLiveTable from "../components/homePage/CryptoLiveTable";
 import ForexLiveTable from '../components/homePage/ForexLiveTable'
+import CurrencyConverter from '../components/homePage/CurrencyConverter'
 function HomePage() {
   return (
     <div className="bg-custom-blue ">
@@ -14,6 +15,7 @@ function HomePage() {
       <Details />
       <CryptoLiveTable />
       <ForexLiveTable/>
+      <CurrencyConverter/>
       
 
     </div>

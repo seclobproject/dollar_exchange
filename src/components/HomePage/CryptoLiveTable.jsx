@@ -114,7 +114,7 @@ function Table() {
         <span className="text-gray-500 text-[8px] xs:text-[12px] sm:text-[14px] ">{currentTime}</span>
       </div>
 
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg border border-gray-600" style={{ maxHeight: '400px', overflowY: 'auto' }}>        <table className="w-full text-sm text-left rtl:text-right">
+      <div className="relative overflow-x-auto shadow-md rounded-lg border border-gray-600" style={{ maxHeight: '400px', overflowY: 'auto' }}>        <table className="w-full text-sm text-left rtl:text-right">
           <thead className="text-xs text-white bg-table-color">
             <tr className="h-14">
               <th scope="col" className="px-6 py-3">
