@@ -33,9 +33,19 @@ box-sizing: border-box;
     width: 35vw;
 }
 .logdata{
-    height: 600px;
-    width: 25vw;
+    height: 110px;
+    width: 10vw;
     margin-top: 580px;
+}
+.logtxt{
+    padding-left: 20px;
+    padding-top: 35px;
+    width: 25vw;
+}
+.logtxt2{
+    padding-left: 20px;
+    padding-top: 35px;
+    width: 20vw;
 }
 .login{
     height: 1006px;
@@ -46,9 +56,11 @@ box-sizing: border-box;
     margin-top: 300px;
 }
 .logdiv1{
-    padding: 100px;
+    /* padding: 100px; */
     padding-top: 100px;
+    padding-left: 90px;
     font-size: 2rem;
+    padding-bottom: 20px;
 }
 .logtext{
     padding-left: 80px;
@@ -64,7 +76,7 @@ input[type="checkbox"]{
     height: 50px;
     width: 450px;
    margin-left: 100px;
-    background-color: black;
+    background-color:#151416;
     color: white;
     margin-top: 30px;
     font-size: 25px;
@@ -89,4 +101,90 @@ input[type="checkbox"]{
     margin: 40px;
     font-size: 22px;
     margin-left: 200px;
+}
+.forgot{
+    margin: 40px;
+    font-size: 22px;
+    margin-left: 150px;
+}
+.sign1{
+    height: 100vh;
+    width: 30vw;
+    left: 0;
+    position: absolute;
+}
+.signimg{
+    height: 900px;
+    width: 28vw;
+}
+.sign2{
+    height: 100vh;
+    width: 30vw;
+    left: 700px;
+    position: absolute;
+}
+.sign3{
+    height: 100vh;
+    width: 40vw;
+   right: 0;
+    position: absolute;
+}
+.signup{
+    height: 1165px;
+    width: 25vw;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    background-color: whitesmoke;
+    margin-top: 140px;
+}
+.signdiv2{
+    margin: 40px;
+    font-size: 22px;
+    margin-left: 150px;
+}
+.signdata{
+    padding-top: 600px;
+    height: auto;
+    width: 25vw;
+    padding-left: 10px;
+}
+.veriotp{
+    padding-left: 460px;
+    font-size: 23px;
+    padding-top: 50px;
+}
+.veritxt{
+    padding-left:15px;
+    padding-top: 35px;
+    width: 23vw;
+}
+.veritxt2{
+    padding-left: 15px;
+    padding-top: 35px;
+    width: 20vw;
+}
+.veri2{
+    height: 100vh;
+    width: 30vw;
+    left: 800px;
+    position: absolute;
+}
+.veriinput{
+    height: 70px;
+    width: 70px;
+    margin: 10px;
+    margin-left: 10px;
+    margin-right: 15px;
+    border: 0.5px solid #151416;
+    border-radius: 10px;
+}
+.veridiv3{
+    margin-left: 90px;
+}
+.veridiv1{
+    /* padding: 100px; */
+    padding-top: 100px;
+    padding-left: 101px;
+    font-size: 2rem;
+    padding-bottom: 20px;
 }

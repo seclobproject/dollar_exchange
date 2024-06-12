@@ -6,6 +6,7 @@ import ForgotPasswordPage from "./pages/ForgotPassword";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from "./pages/Login";
 import '@fortawesome/fontawesome-free/css/all.css';
+import Verificationcode from "./pages/Verificationcode";
 function App() {
   return (
     <Router>
@@ -13,7 +14,9 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
+      <Route path="/verificationcode" element={<Verificationcode/>} />
+
     
     </Routes>
   </Router>
