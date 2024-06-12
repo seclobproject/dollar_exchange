@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/homePage/Header";
 import Hero from "../components/homePage/Hero";
 import OfferSlider from '../components/homePage/OfferSlider'
-import News from "../components/News";
+import Details from "../components/homePage/Details";
 function HomePage() {
   return (
     <div className="bg-custom-blue ">
@@ -10,7 +10,7 @@ function HomePage() {
       <Hero />
       <OfferSlider />
       
-      <News />
+      <Details />
 
   
     </div>
