@@ -9,3 +9,14 @@
                0 0 10px rgba(255, 255, 255, 0.6),
                0 0 15px rgba(255, 255, 255, 0.6);
 }
+.heading-small-device {
+  word-wrap: break-word;
+  white-space: normal;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .heading-small-device {
+    max-width: 100%;
+  }
+}

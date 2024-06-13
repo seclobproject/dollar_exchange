@@ -70,8 +70,10 @@ function OfferSlider() {
       {
         breakpoint: 480, // for mobile devices
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: "40px",
         },
       },
       {
@@ -85,7 +87,7 @@ function OfferSlider() {
   };
 
   return (
-    <div className="lg:px-20 md:px-10 px-8 w-full">
+    <div className="lg:px-20 md:px-10 xs:px-8 px-2 xs:ml-0 ml-[-23px] w-full">
       <Slider {...settings}>
         {slides.map((slide, index) => (
           <div key={index} className="p-[10px] relative">
@@ -94,12 +96,12 @@ function OfferSlider() {
               alt={`Slide ${index + 1}`}
               className="w-full opacity-50"
             />
-            <div className="absolute inset-0 flex items-center justify-center mb-0 xl:mb-10">
-              <div className="text-white flex flex-col items-start text-start p-6 xs:p-10 lg:p-11 xl:p-16">
-                <span className="font-semibold text-[12px] xs:text-[18px] sm:text-[20px] md:text-[20px] lg:text-[24px] xl:text-[32px] leading-tight">
+            <div className="absolute  inset-0 flex items-center xs:px-0 px-8   justify-start mb-0 xl:mb-10">
+              <div className="text-white  flex flex-col gap-y-10 xs:gap-y-0 items-start text-start p-6 xs:p-10 lg:p-11 xl:p-16">
+                <span className="font-semibold text-[20px] xs:text-[18px] sm:text-[20px] md:text-[20px] lg:text-[24px] xl:text-[32px] leading-tight">
                   {slide.Heading}
                 </span>
-                <span className="text-[8px] xs:text-[12px] sm:text-[14px] md:text-[14px] lg:text-[18px] xl:text-[20px] pt-2 xs:pt-10 md:pt-5 xl:pt-12 leading-tight">
+                <span className="text-[16px] xs:text-[12px] sm:text-[14px] md:text-[14px] lg:text-[18px] xl:text-[20px] pt-2 xs:pt-10 md:pt-5 xl:pt-12 leading-tight">
                   {slide.Description}
                 </span>
                 <button className="bg-custom-gradient w-26 sm:w-32 md:w-36 mt-3 sm:mt-6 rounded-lg p-[2px] sm:p-[2px] ease-in hover:scale-90">

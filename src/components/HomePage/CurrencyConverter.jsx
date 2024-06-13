@@ -71,8 +71,10 @@ function CurrencyConverter() {
   }
 
   return (
-    <div className="flex flex-col lg:px-24 md:px-10 px-4  items-start  text-white justify-start min-h-screen text-center">
-      <h1 className="sm:text-2xl text-md font-semibold mb-4">Currency Converter</h1>
+    <div className="flex flex-col lg:px-24 md:px-10 px-4 md:mt-4 xl:mt-10 mt-2 items-start  text-white justify-start  text-center">
+      <h1 className="sm:text-2xl text-md font-semibold mb-4">
+        Currency Converter
+      </h1>
       <div className="flex items-center mb-4">
         <div className="flex flex-col justify-between items-start">
           <p>From</p>
@@ -85,7 +87,10 @@ function CurrencyConverter() {
           />
         </div>
 
-        <span className="cursor-pointer pt-5 px-4 ease-in hover:scale-90">
+        <span
+          onClick={handleSwapCurrencies}
+          className="cursor-pointer pt-5 px-4 ease-in hover:scale-90"
+        >
           <img src={img} alt="" />
         </span>
 
@@ -100,7 +105,7 @@ function CurrencyConverter() {
           />
         </div>
       </div>
-      <div className="sm:text-lg text-sm flex flex-row">
+      <div className="sm:text-lg text-sm mt-2 flex flex-row text-gray-400">
         <p>
           1 {fromCurrency} = {exchangeRate.toFixed(4)} {toCurrency}
         </p>
@@ -109,7 +114,7 @@ function CurrencyConverter() {
           1 {toCurrency} = {reverseExchangeRate.toFixed(4)} {fromCurrency}
         </p>
       </div>
-      <div className="text-gray-500 mt-2">
+      <div className="text-gray-500 mt-4">
         <p>Last Updated: {lastUpdated}</p>
       </div>
     </div>
