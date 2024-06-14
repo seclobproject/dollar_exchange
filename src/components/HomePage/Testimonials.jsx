@@ -94,8 +94,8 @@ function Testimonials() {
           .fill()
           .map((_, index) => (
             <div key={index} className="px-2">
-              <span className="items-center sm:items-start py-4 sm:py-2 md:py-6 xl:py-10  xl:h-[271px] xs:h-[300px] xs:w-full w-[210px] xs:px-6 px-4 sm:px-10 flex flex-col gap-y-4 p-2 mt-8 justify-center bg-custom-gray text-white rounded-md">
-                <div className="flex sm:flex-row flex-col justify-center gap-x-3 items-center">
+<span className="items-center sm:items-start py-4 sm:py-2 md:py-6 xl:py-10 flex-grow xs:w-full w-auto xs:px-6 px-4 sm:px-10 flex flex-col gap-y-4 p-2 mt-8 justify-center bg-custom-gray text-white rounded-md">
+<div className="flex sm:flex-row flex-col justify-center gap-x-3 items-center">
                   <img src={userImg} alt="User" />
                   <span className="flex flex-col gap-y-2">
                     <p className="text-sm sm:text-base">John Smith</p>

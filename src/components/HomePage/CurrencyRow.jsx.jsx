@@ -13,7 +13,7 @@ export default function CurrencyRow(props) {
       <div className="flex border border-gray-300 rounded-md overflow-hidden h-9  w-full ">
         <input
           type="number"
-          className="border-none p-2  text-black w-full  xs:w-32 md:w-48 lg:w-80 focus:outline-none"
+          className="border-none p-2  text-black w-[260px] xs:w-32 md:w-48 lg:w-80 focus:outline-none"
           value={amount}
           onChange={onChangeAmount}
         />

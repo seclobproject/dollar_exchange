@@ -72,10 +72,13 @@ function CurrencyConverter() {
 
   return (
     <div className="flex flex-col lg:px-24 md:px-10 px-4 md:mt-4 xl:mt-10 mt-2 items-start  text-white justify-start  text-center">
-      <h1 className="sm:text-2xl text-md font-semibold mb-4">
+      <h1 className="sm:text-2xl text-md font-semibold mb-2 xs:mb-4">
         Currency Converter
       </h1>
-      <div className="flex items-center mb-4">
+      <div className="text-gray-500 mt-0 mb-2 xs:hidden ">
+        <p>Last Updated: {lastUpdated}</p>
+      </div>
+      <div className="flex xs:flex-row flex-col w-full  items-center mb-4">
         <div className="flex flex-col justify-between items-start">
           <p>From</p>
           <CurrencyRow
@@ -105,7 +108,7 @@ function CurrencyConverter() {
           />
         </div>
       </div>
-      <div className="sm:text-lg text-sm mt-2 flex flex-row text-gray-400">
+      <div className="sm:text-lg mx-auto xs:mx-0 text-sm mt-2 flex flex-row text-gray-400">
         <p>
           1 {fromCurrency} = {exchangeRate.toFixed(4)} {toCurrency}
         </p>
@@ -114,7 +117,7 @@ function CurrencyConverter() {
           1 {toCurrency} = {reverseExchangeRate.toFixed(4)} {fromCurrency}
         </p>
       </div>
-      <div className="text-gray-500 mt-4">
+      <div className="text-gray-500 mt-4 xs:block hidden">
         <p>Last Updated: {lastUpdated}</p>
       </div>
     </div>
