@@ -7,6 +7,7 @@ import CryptoLiveTable from "../components/homePage/CryptoLiveTable";
 import ForexLiveTable from '../components/homePage/ForexLiveTable'
 import CurrencyConverter from '../components/homePage/CurrencyConverter'
 import Testimonials from "../components/homePage/Testimonials";
+import Footer from "../components/homePage/Footer";
 function HomePage() {
   return (
     <div className="bg-custom-blue ">
@@ -18,7 +19,7 @@ function HomePage() {
       <ForexLiveTable/>
       <CurrencyConverter/>
       <Testimonials/>
-
+      <Footer/>
     </div>
   );
 }
