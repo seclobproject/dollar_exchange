@@ -2,71 +2,53 @@ import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { IoLogoApple } from "react-icons/io5";
-import img from "../../assets/images/authenticationPageImgs/loginImg.png";
+import img from "../../assets/images/authenticationPageImgs/newPswrdImg.png";
 import img2 from "../../assets/images/logo.png";
-import Mobileimg from "../../assets/images/authenticationPageImgs/loginImgMobile.png";
+import Mobileimg from "../../assets/images/authenticationPageImgs/newPswrd-sm.png";
 
-function LoginComponent() {
+function NewPswrd() {
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row ">
       <img
         src={img}
         alt=""
         className="hidden md:block md:h-[200px] md:w-[170px] lg:w-[220px] lg:h-[250px] xl:w-[380px] xl:h-[420px]"
       />
-      <div className="hidden md:flex flex-col lg:gap-y-8 md:gap-y-4 gap-y-0 pt-24 xl:pl-7 pl-0 text-white justify-center    items-start">
-        <img className="w-[160px] " src={img2} alt="" />
+      <div className="hidden md:flex flex-col lg:gap-y-8 md:gap-y-4 gap-y-0 pt-24 xl:pl-7 pl-0 text-white justify-center items-start">
+        <img className="w-[160px]" src={img2} alt="" />
         <p className="md:text-2xl lg:text-4xl font-bold">
-        Exchange Fast, <br />secure and <br /> smarter
+          Transact swiftly, <br /> safeguarded
         </p>
         <p className="lg:max-w-[300px] md:max-w-[200px] text-xs lg:text-sm text-gray-400">
-        We make it fast, secure, and smarter. We prioritize the security of your transactions.
+          We ensure expeditious, fortified, and enhanced operations. The
+          protection of your transactions is our paramount concern.
         </p>
       </div>
 
-      <div className=" md:ml-10 lg:ml-0 md:pr-8 lg:pr-20 xl:pr-36 pr-0 ml-0 mt-10 flex flex-1 md:flex-auto items-center rounded-xl justify-center md:bg-custom-blue">
-        <div className="bg-custom-blue md:bg-white p-8 rounded-xl shadow-md w-full max-w-md md:max-w-sm">
-          {/* Create account text and image */}
-          <div className="flex flex-col gap-y-2 justify-start">
-            <img
-              src={Mobileimg}
-              className="md:hidden mx-auto -mt-[120px] xs:-mt-20 xs:w-[170px] xs:h-[150px] sm:w-[170px] sm:h-[140px] w-[160px] h-[120px]"
-              alt=""
-            />
+      <div className=" md:ml-10 lg:ml-0 md:pr-8 lg:pr-20 xl:pr-36 pr-0 ml-0 md:mt-10 -mt-6 flex flex-1 md:flex-auto items-center pt-16 rounded-xl justify-center md:bg-custom-blue">
+        {/* Added flex flex-col justify-between h-full to this div */}
+        <div className="bg-custom-blue md:bg-white p-8 rounded-xl shadow-md w-full max-w-md md:max-w-sm flex flex-col gap-y-10 h-full">
+          <div>
+            {/* Create account text and image */}
+
             <div className="mb-6 text-white md:text-black text-start">
               <p className="text-xs sm:text-sm md:text-md font-light md:font-medium">
-                Welcome Back
+                New Password
               </p>
-              <h2 className="sm:text-2xl xs:text-xl text-lg  font-normal md:font-medium">
-                Log In To Your Account{" "}
+              <h2 className="sm:text-2xl xs:text-xl text-lg font-normal md:font-medium">
+                Create New Password{" "}
               </h2>
             </div>
-          </div>
-          {/* End of Create account text and image */}
 
-          <form>
-       
+            {/* End of Create account text and image */}
 
-     <div className="mb-6 relative">
-              <label
-                htmlFor="emailOrPhone"
-                className="block sm:text-md text-sm md:text-gray-700 text-gray-400 mb-1 absolute -top-3 left-2 md:bg-white bg-custom-blue px-1"
-              >
-                Enter Email Or Phone
-              </label>
-              <input
-                type="text"
-                id="emailOrPhone"
-                className="p-2 w-full border-2  border-gray-200 focus:border-gray-400 text-gray-200 md:text-black  rounded-md focus:outline-none md:bg-white bg-custom-blue focus:ring-opacity-50"
-              />
-            </div>
-           
-            <div className="mb-6 relative">
+            <form>
+            <div className="mb-4 relative">
               <label
                 htmlFor="password"
                 className="block sm:text-md text-sm md:text-gray-700 text-gray-400 mb-1 absolute -top-3 left-2 md:bg-white bg-custom-blue px-1"
               >
-                Password
+                Enter New Password
               </label>
               <input
                 type="password"
@@ -74,38 +56,30 @@ function LoginComponent() {
                 className="p-2 w-full border-2  border-gray-200 focus:border-gray-400 text-gray-200 md:text-black  rounded-md focus:outline-none md:bg-white bg-custom-blue focus:ring-opacity-50"
               />
             </div>
-            <div className="mb-6 relative">
+            <div className="mb-4 relative">
               <label
                 htmlFor="confirmPassword"
                 className="block sm:text-md text-sm md:text-gray-700 text-gray-400 mb-1 absolute -top-3 left-2 md:bg-white bg-custom-blue px-1"
               >
-              Enter Otp
+                Confirm New Password
               </label>
               <input
                 type="password"
                 id="confirmPassword"
                 className="p-2   border-2  border-gray-200 focus:border-gray-400 w-full text-gray-200 md:text-black  rounded-md focus:outline-none md:bg-white bg-custom-blue focus:ring-opacity-50"
               />
-                 <div className="mb-6 flex justify-between pt-2">
-                 <span className="text-sm underline md:text-md md:font-medium font-normal md:text-gray-700 text-white cursor-pointer">
-                  Get OTP
-                </span>
-                <span className="text-sm underline md:text-md md:font-medium font-normal md:text-gray-700 text-white cursor-pointer">
-                  Forgot Password
-                </span>
-              </div>
             </div>
-            
-           
-            <button
-              type="submit"
-              className="w-full font-medium md:bg-button-color bg-white md:text-white text-black py-2 px-4 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50"
-            >
-              Get Started
-            </button>
-          </form>
-          {/* social media buttons   */}
-          <div className="hidden md:block">
+
+              <button
+                type="submit"
+                className="w-full font-medium md:bg-button-color bg-white md:text-white text-black py-2 px-4 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50"
+              >
+                GET OTP
+              </button>
+            </form>
+          </div>
+          {/* social media buttons */}
+          <div className="hidden md:block mt-6">
             <div className="flex items-center my-4">
               <div className="flex-grow border-t border-gray-300"></div>
               <span className="mx-2 text-gray-500">or</span>
@@ -135,13 +109,13 @@ function LoginComponent() {
               </p>
             </div>
           </div>
-          {/* end of social media buttons   */}
-          {/* social media buttons mobile */}
+          {/* end of social media buttons */}
           <div className="md:hidden mt-6 flex flex-col items-center">
-            <p className="text-gray-300 text-sm sm:text-md mb-2">
-             New User?{" "}
+            <img src={Mobileimg} className="mx-auto w-auto h-auto" alt="" />
+            <p className="text-gray-300 text-sm sm:text-md mt-3 mb-2">
+              Already have an account?{" "}
               <a href="#" className="text-blue-500 font-normal hover:underline">
-               Sign Up Here
+                Login
               </a>
             </p>
             <p className="text-gray-300 text-sm sm:text-md mb-2">
@@ -156,11 +130,10 @@ function LoginComponent() {
               <IoLogoApple className="text-2xl px-1 bg-white rounded-md hover:text-gray-900 cursor-pointer" />
             </div>
           </div>
-          {/* end of social media buttons mobile */}
         </div>
       </div>
     </div>
   );
 }
 
-export default LoginComponent;
+export default NewPswrd;
