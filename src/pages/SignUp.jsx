@@ -4,7 +4,7 @@ function SignUp() {
   return (
     <div>
       {/* create account page  */}
-      <div className='bg-custom-blue'>
+      <div className='bg-custom-blue min-h-screen'>
          <Signup/>
       </div>
 
