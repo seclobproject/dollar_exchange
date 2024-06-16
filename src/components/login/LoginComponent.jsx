@@ -17,10 +17,12 @@ function LoginComponent() {
       <div className="hidden md:flex flex-col lg:gap-y-8 md:gap-y-4 gap-y-0 pt-24 xl:pl-7 pl-0 text-white justify-center    items-start">
         <img className="w-[160px] " src={img2} alt="" />
         <p className="md:text-2xl lg:text-4xl font-bold">
-        Exchange Fast, <br />secure and <br /> smarter
+          Exchange Fast, <br />
+          secure and <br /> smarter
         </p>
         <p className="lg:max-w-[300px] md:max-w-[200px] text-xs lg:text-sm text-gray-400">
-        We make it fast, secure, and smarter. We prioritize the security of your transactions.
+          We make it fast, secure, and smarter. We prioritize the security of
+          your transactions.
         </p>
       </div>
 
@@ -30,7 +32,7 @@ function LoginComponent() {
           <div className="flex flex-col gap-y-2 justify-start">
             <img
               src={Mobileimg}
-              className="md:hidden mx-auto -mt-[120px] xs:-mt-20 xs:w-[170px] xs:h-[150px] sm:w-[170px] sm:h-[140px] w-[160px] h-[120px]"
+              className="md:hidden mx-auto w-auto h-auto"
               alt=""
             />
             <div className="mb-6 text-white md:text-black text-start">
@@ -45,9 +47,7 @@ function LoginComponent() {
           {/* End of Create account text and image */}
 
           <form>
-       
-
-     <div className="mb-6 relative">
+            <div className="mb-6 relative">
               <label
                 htmlFor="emailOrPhone"
                 className="block sm:text-md text-sm md:text-gray-700 text-gray-400 mb-1 absolute -top-3 left-2 md:bg-white bg-custom-blue px-1"
@@ -60,7 +60,7 @@ function LoginComponent() {
                 className="p-2 w-full border-2  border-gray-200 focus:border-gray-400 text-gray-200 md:text-black  rounded-md focus:outline-none md:bg-white bg-custom-blue focus:ring-opacity-50"
               />
             </div>
-           
+
             <div className="mb-6 relative">
               <label
                 htmlFor="password"
@@ -79,15 +79,15 @@ function LoginComponent() {
                 htmlFor="confirmPassword"
                 className="block sm:text-md text-sm md:text-gray-700 text-gray-400 mb-1 absolute -top-3 left-2 md:bg-white bg-custom-blue px-1"
               >
-              Enter Otp
+                Enter Otp
               </label>
               <input
                 type="password"
                 id="confirmPassword"
                 className="p-2   border-2  border-gray-200 focus:border-gray-400 w-full text-gray-200 md:text-black  rounded-md focus:outline-none md:bg-white bg-custom-blue focus:ring-opacity-50"
               />
-                 <div className="mb-6 flex justify-between pt-2">
-                 <span className="text-sm underline md:text-md md:font-medium font-normal md:text-gray-700 text-white cursor-pointer">
+              <div className="mb-6 flex justify-between pt-2">
+                <span className="text-sm underline md:text-md md:font-medium font-normal md:text-gray-700 text-white cursor-pointer">
                   Get OTP
                 </span>
                 <span className="text-sm underline md:text-md md:font-medium font-normal md:text-gray-700 text-white cursor-pointer">
@@ -95,8 +95,7 @@ function LoginComponent() {
                 </span>
               </div>
             </div>
-            
-           
+
             <button
               type="submit"
               className="w-full font-medium md:bg-button-color bg-white md:text-white text-black py-2 px-4 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50"
@@ -139,9 +138,9 @@ function LoginComponent() {
           {/* social media buttons mobile */}
           <div className="md:hidden mt-6 flex flex-col items-center">
             <p className="text-gray-300 text-sm sm:text-md mb-2">
-             New User?{" "}
+              New User?{" "}
               <a href="#" className="text-blue-500 font-normal hover:underline">
-               Sign Up Here
+                Sign Up Here
               </a>
             </p>
             <p className="text-gray-300 text-sm sm:text-md mb-2">

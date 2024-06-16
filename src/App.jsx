@@ -7,6 +7,7 @@ import ForgotPasswordPage from "./pages/ForgotPassword";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import OtpVerification from './pages/OtpVerification'
 import NewPassword from './pages/NewPassword'
+import ExchangePage from "./pages/ExchangePage";
 function App() {
   return (
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/otp-verification" element={<OtpVerification />} />
         <Route path="/new-password" element={<NewPassword />} />
+        <Route path="/exchange" element={<ExchangePage />} />
 
       </Routes>
     </Router>
