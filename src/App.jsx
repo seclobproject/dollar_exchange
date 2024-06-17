@@ -9,6 +9,7 @@ import OtpVerification from './pages/OtpVerification'
 import NewPassword from './pages/NewPassword'
 import ExchangePage from "./pages/ExchangePage";
 import Details from "./pages/Details";
+import PaymentPage from "./pages/PaymentPage";
 function App() {
   return (
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/new-password" element={<NewPassword />} />
         <Route path="/exchange" element={<ExchangePage />} />
         <Route path="/details-form" element={<Details />} />
+        <Route path="/payment" element={<PaymentPage />} />
 
       </Routes>
     </Router>
