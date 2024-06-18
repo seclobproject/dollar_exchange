@@ -101,6 +101,9 @@ function ForexLiveTable() {
 
   return (
     <div className="mt-6 lg:px-24 md:px-10 px-4 pb-5">
+      <h1 className="text-white text-md xs:text-xl pl-3 sm:pl-0  md:text-2xl lg:text-2xl font-semibold mb-5 mt-8 sm:mt-12 md:mt-14 lg:mt-16">
+  Forex Live Market List
+</h1>
       <div className="flex justify-between items-center mb-4">
         <span className="flex flex-row items-center gap-x-3">
           <input

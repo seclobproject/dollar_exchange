@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import CurrencyRow from "./CurrencyRow.jsx";
 import img from "../../assets/images/exchangeImg2.png";
 
-const BASE_URL = "https://api.frankfurter.app/latest";
+const CURRENCIES_URL = "https://marketdata.tradermade.com/api/v1/live_currencies_list?api_key=jwqQVTw1I_n-jHVE-Gyp";
+const CONVERT_URL = "https://marketdata.tradermade.com/api/v1/convert?api_key=jwqQVTw1I_n-jHVE-Gyp";
 
 function CurrencyConverter() {
   const [currencyOptions, setCurrencyOptions] = useState([]);
@@ -24,10 +25,11 @@ function CurrencyConverter() {
   }
 
   useEffect(() => {
-    fetch("https://api.frankfurter.app/currencies")
+    fetch(CURRENCIES_URL)
       .then((res) => res.json())
       .then((data) => {
-        setCurrencyOptions(Object.keys(data));
+        const currencyKeys = Object.keys(data.available_currencies);
+        setCurrencyOptions(currencyKeys);
         setFromCurrency("USD");
         setToCurrency("INR");
       });
@@ -35,14 +37,13 @@ function CurrencyConverter() {
 
   useEffect(() => {
     if (fromCurrency && toCurrency) {
-      fetch(`${BASE_URL}?amount=1&from=${fromCurrency}&to=${toCurrency}`)
+      fetch(`${CONVERT_URL}&from=${fromCurrency}&to=${toCurrency}&amount=1`)
         .then((res) => res.json())
         .then((data) => {
-          setExchangeRate(data.rates[toCurrency]);
-          setReverseExchangeRate(1 / data.rates[toCurrency]);
-          const currentTime = new Date();
+          setExchangeRate(data.quote);
+          setReverseExchangeRate(1 / data.quote);
           setLastUpdated(
-            currentTime.toLocaleString("en-US", {
+            new Date(data.requested_time).toLocaleString("en-US", {
               month: "long",
               day: "numeric",
               year: "numeric",
@@ -71,14 +72,14 @@ function CurrencyConverter() {
   }
 
   return (
-    <div className="flex flex-col lg:px-24 md:px-10 px-4 md:mt-4 xl:mt-10 mt-2 items-start  text-white justify-start  text-center">
+    <div className="flex flex-col lg:px-24 md:px-10 px-4 md:mt-4 xl:mt-10 mt-2 items-start text-white justify-start text-center">
       <h1 className="sm:text-2xl text-md font-semibold mb-2 xs:mb-4">
         Currency Converter
       </h1>
-      <div className="text-gray-500 mt-0 mb-2 xs:hidden ">
+      <div className="text-gray-500 mt-0 mb-2 xs:hidden">
         <p>Last Updated: {lastUpdated}</p>
       </div>
-      <div className="flex xs:flex-row flex-col w-full  items-center mb-4">
+      <div className="flex xs:flex-row flex-col w-full items-center mb-4">
         <div className="flex flex-col justify-between items-start">
           <p>From</p>
           <CurrencyRow
@@ -94,7 +95,7 @@ function CurrencyConverter() {
           onClick={handleSwapCurrencies}
           className="cursor-pointer pt-5 px-4 ease-in hover:scale-90"
         >
-          <img src={img} alt="" />
+          <img src={img} alt="Swap" />
         </span>
 
         <div className="flex flex-col justify-between items-start">

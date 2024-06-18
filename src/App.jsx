@@ -10,6 +10,7 @@ import NewPassword from './pages/NewPassword'
 import ExchangePage from "./pages/ExchangePage";
 import Details from "./pages/Details";
 import PaymentPage from "./pages/PaymentPage";
+import PaymentSuccess from "./pages/PaymentSuccess";
 function App() {
   return (
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/exchange" element={<ExchangePage />} />
         <Route path="/details-form" element={<Details />} />
         <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
 
       </Routes>
     </Router>

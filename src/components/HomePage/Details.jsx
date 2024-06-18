@@ -28,7 +28,7 @@ const cardData = [
 function Details() {
   return (
     <div className="lg:px-20 md:px-10 px-4 text-white mt-10 xs:mt-16">
-      <h1 className='text-[12px] font-semibold xs:text-[24px] ml-6 xs:ml-4 my-6 xs:my-10'>Currency Exchange Made Effortless & Efficient</h1>
+      <h1 className='text-base font-semibold xs:text-xl sm:text-2xl ml-6 xs:ml-4 my-6 xs:my-10'>Currency Exchange Made Effortless & Efficient</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 px-4 xs:px-6 xl:px-4 gap-6 md:gap-8 ">
         {cardData.map((card, index) => (
           <div key={index} className="p-4 md:p-3 lg:p-4 border-gray-600 border-2 gap-1 lg:gap-2 xl:gap-5 rounded-lg flex flex-col justify-center items-center text-center">

@@ -12,6 +12,7 @@ function PaymentDetailsComponent() {
   const [paymentMethod, setPaymentMethod] = useState("Cash on delivery");
   const [location, setLocation] = useState("");
   const [isReview, setIsReview] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
 
   const handleState = (e) => {
     const { name, value } = e.target;
@@ -21,10 +22,12 @@ function PaymentDetailsComponent() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsReview(true);
+    setCurrentStep(2);
   };
 
   const handleBack = () => {
     setIsReview(false);
+    setCurrentStep(1);
   };
 
   return (
@@ -33,16 +36,20 @@ function PaymentDetailsComponent() {
       <div className="bg-custom-blue min-h-screen xl:pl-24 lg:pl-12 md:pl-8 flex md:flex-row flex-col">
         <div className="w-full md:w-2/3 flex flex-col">
           <h1 className="md:text-xl text-lg underline p-6 text-white underline-offset-8">
-       {!isReview ?  'Buyer Payment Details' : 'Review'}    
+            {!isReview ? "Buyer Payment Details" : "Review"}
           </h1>
-          <PaymentStatus isReview={isReview}  />
-          {!isReview ?  <RadioButtons
-            paymentMethod={paymentMethod}
-            setPaymentMethod={setPaymentMethod}
-            location={location}
-            setLocation={setLocation}
-          />:''}
-        
+          <PaymentStatus currentStep={currentStep} />
+          {!isReview ? (
+            <RadioButtons
+              paymentMethod={paymentMethod}
+              setPaymentMethod={setPaymentMethod}
+              location={location}
+              setLocation={setLocation}
+            />
+          ) : (
+            ""
+          )}
+          php Copy code
           <div className="md:hidden">
             <OrderSummary />
           </div>
@@ -80,6 +87,7 @@ function PaymentDetailsComponent() {
               fields={fields}
               paymentMethod={paymentMethod}
               handleBack={handleBack}
+              setCurrentStep={setCurrentStep}
             />
           )}
         </div>
