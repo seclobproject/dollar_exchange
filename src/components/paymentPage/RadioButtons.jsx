@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { TiArrowSortedDown } from "react-icons/ti"; // Import down arrow icon from react-icons
 
-function RadioButtons() {
-  const [location, setLocation] = useState("");
+function RadioButtons ({ paymentMethod, location, setPaymentMethod, setLocation }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("Cash on delivery");
+ 
 
   const handlePaymentMethodChange = (e) => {
     setPaymentMethod(e.target.value);
