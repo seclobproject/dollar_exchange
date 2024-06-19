@@ -8,21 +8,22 @@ function Table() {
   const [currentTime, setCurrentTime] = useState("");
   const [cryptoData, setCryptoData] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
+ const URL=import.meta.env.VITE_CRYPTO_LIVE_URL
+ const API=import.meta.env.VITE_CRYPTO_LIVE_API
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true); // Start loading
+        setLoading(true); 
         const response = await axios.get(
-          "https://openapiv1.coinstats.app/coins",
-          {
+          URL,{
             headers: {
-              "X-API-KEY": "pDy67740YR8w33lzWbQS28Em68sAMbKje1NU10p0bIw=",
+              "X-API-KEY": API,
               "accept": "application/json"
             }
           }
         );
-        console.log(response);
         setCryptoData(response.data.result);
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import CurrencyRow from "./CurrencyRow.jsx";
 import img from "../../assets/images/exchangeImg2.png";
 
-const CURRENCIES_URL = "https://marketdata.tradermade.com/api/v1/live_currencies_list?api_key=jwqQVTw1I_n-jHVE-Gyp";
-const CONVERT_URL = "https://marketdata.tradermade.com/api/v1/convert?api_key=jwqQVTw1I_n-jHVE-Gyp";
+const CURRENCIES_URL =import.meta.env.VITE_CURRENCIES_URL;
+
+const CONVERT_URL =import.meta.env.VITE_CURRENCY_CONVERT_URL;
 
 function CurrencyConverter() {
   const [currencyOptions, setCurrencyOptions] = useState([]);
@@ -29,6 +30,7 @@ function CurrencyConverter() {
       .then((res) => res.json())
       .then((data) => {
         const currencyKeys = Object.keys(data.available_currencies);
+        console.log(currencyKeys);
         setCurrencyOptions(currencyKeys);
         setFromCurrency("USD");
         setToCurrency("INR");

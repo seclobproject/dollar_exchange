@@ -1,42 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import useConversionRate from "../../custom_hooks/useConversionRate";  // Import the custom hook
 import { bankDetailsFields, bankAccountFields } from "./data";
+import {bankDetailsInitialState} from '../../schemas'
 
-const BankAccountDetails = ({ handleData, handleBack }) => {
-  const initialState = {
-    account_holder_name: '',
-    branch_name: '',
-    ifsc_code: '',
-    buy_quantity: '',
-    amount: '',
-    bank_name: '',
-    account_no: '',
-    account_type: '',
-  };
+const BankAccountDetails = ({   handleData, handleBack,setBuyQuantity,setAmount}) => {
+  const conversionRate = useConversionRate("USDT", "AED");
 
-  const bankDetailsSchema = Yup.object().shape({
-    account_holder_name: Yup.string().required("Please enter the account holder's name"),
-    branch_name: Yup.string().required("Please enter the branch name"),
-    ifsc_code: Yup.string().required("Please enter the IFSC code"),
-    buy_quantity: Yup.number().required("Please enter buying quantity"),
-    amount: Yup.string().required("Please enter the amount"),
-    bank_name: Yup.string().required("Please enter the bank name"),
-    account_no: Yup.string().required("Please enter the account number"),
-    account_type: Yup.string().required("Please select the account type"),
-
-  });
 
   const formik = useFormik({
-    initialValues: initialState,
+    initialValues: bankDetailsInitialState,
     validationSchema: bankDetailsSchema,
-      onSubmit: (values, { resetForm }) => {
+    onSubmit: (values, { resetForm }) => {
       handleData(values);
       resetForm();
     },
   });
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit, isValid } = formik;
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit, setFieldValue, isValid } = formik;
+
+  useEffect(() => {
+    if (conversionRate && values.buy_quantity) {
+      const convertedAmount = (values.buy_quantity * conversionRate).toFixed(2);
+      setFieldValue("amount", convertedAmount);
+      setBuyQuantity(values.buy_quantity);
+      setAmount(convertedAmount);
+    }
+  }, [conversionRate, values.buy_quantity, setFieldValue, setBuyQuantity, setAmount]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -47,7 +38,7 @@ const BankAccountDetails = ({ handleData, handleBack }) => {
               <label className="block text-sm font-normal mb-2 md:mb-0" htmlFor={name}>
                 {label}
               </label>
-              <div className="md:w-2/3">
+              <div className="md:w-2/3 relative">
                 <input
                   type={type}
                   id={name}
@@ -57,7 +48,13 @@ const BankAccountDetails = ({ handleData, handleBack }) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values[name]}
+                  readOnly={name === "amount"} // Make the amount field read-only
                 />
+                {(name === "buy_quantity" || name === "amount") && (
+                  <span className="absolute top-2 right-3 text-xs md:text-sm text-gray-300">
+                    {name === "buy_quantity" ? "USDT" : "AED"}
+                  </span>
+                )}
                 {touched[name] && errors[name] && (
                   <p className="form-error text-red-400">{errors[name]}</p>
                 )}
@@ -110,7 +107,7 @@ const BankAccountDetails = ({ handleData, handleBack }) => {
           ))}
         </div>
       </div>
-      <div className="flex flex-col ">
+      <div className="flex flex-col">
         <button
           type="submit"
           className="ease-in hover:scale-90 md:w-60 w-full bg-custom-green text-black font-medium py-2 rounded-md mt-4 md:mt-6"

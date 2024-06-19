@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { initialState } from "./data";
 import PaymentStatus from "./PaymentStatus";
 import RadioButtons from "./RadioButtons";
 import OrderSummary from "./OrderSummary";
@@ -8,14 +7,16 @@ import CashOnDeliveryDetails from "./CashOnDeliveryDetails";
 import ReviewDetails from "./ReviewDetails";
 
 function PaymentDetailsComponent() {
-  const [fields, setFields] = useState(initialState);
   const [paymentMethod, setPaymentMethod] = useState("Cash on delivery");
   const [location, setLocation] = useState("");
   const [isReview, setIsReview] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
+  const [details, setDetails] = useState({});
+  const [buyQuantity, setBuyQuantity] = useState("");
+  const [amount, setAmount] = useState("");
 
   const handleData = (data) => {
-    console.log(data);
+    setDetails(data);
     setIsReview(true);
     setCurrentStep(2);
   };
@@ -45,29 +46,30 @@ function PaymentDetailsComponent() {
             ""
           )}
           <div className="md:hidden">
-            <OrderSummary />
+            <OrderSummary buyQuantity={buyQuantity} amount={amount} />
           </div>
           {!isReview ? (
-            <div
-              className="order-3 md:order-3 text-white p-6 rounded shadow-md w-full bg-custom-blue"
-              // onSubmit={handleSubmit}
-            >
+            <div className="order-3 md:order-3 text-white p-6 rounded shadow-md w-full bg-custom-blue">
               {paymentMethod === "Cash on delivery" ? (
                 <CashOnDeliveryDetails
                   handleData={handleData}
                   handleBack={handleBack}
+                  setBuyQuantity={setBuyQuantity}
+                  setAmount={setAmount}
                 />
               ) : (
                 <BankAccountDetails
                   handleData={handleData}
                   handleBack={handleBack}
+                  setBuyQuantity={setBuyQuantity}
+                  setAmount={setAmount}
                 />
               )}
               <div className="flex flex-col "></div>
             </div>
           ) : (
             <ReviewDetails
-              fields={fields}
+              fields={details}
               paymentMethod={paymentMethod}
               handleBack={handleBack}
               setCurrentStep={setCurrentStep}
@@ -76,7 +78,7 @@ function PaymentDetailsComponent() {
         </div>
         <div className="min-h-screen w-[1px] re bg-white hidden md:block"></div>
         <div className="hidden md:block">
-          <OrderSummary />
+          <OrderSummary buyQuantity={buyQuantity} amount={amount} />
         </div>
       </div>
     </div>

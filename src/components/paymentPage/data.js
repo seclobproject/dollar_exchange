@@ -4,8 +4,8 @@ export const personalDetailsFields = [
   { label: 'Company Name', type: 'text', name: 'company_name', placeholder: 'company name' },
   { label: 'Phone Number', type: 'text', name: 'phone_number', placeholder: 'Enter your phone number' },
   { label: 'Email Id', type: 'email', name: 'email_id', placeholder: 'Enter your Email' },
-  { label: 'Buy Quantity', type: 'number', name: 'buy_quantity', placeholder: 'Enter Buying Quantity' },
-  { label: 'Amount', type: 'text', name: 'amount', placeholder: 'Enter your mobile number' },
+  { label: 'Buy Quantity', type: '', name: 'buy_quantity', placeholder: 'Enter Buying Quantity' },
+  { label: 'Amount', type: 'text', name: 'amount', placeholder: 'Enter Amount' },
  
 ];
 
@@ -20,7 +20,7 @@ export const bankDetailsFields = [
   { label: 'Beneficiary Name', type: 'text', name: 'account_holder_name', placeholder: 'Enter beneficiary name' },
   { label: 'Branch', type: 'text', name: 'branch_name', placeholder: 'Enter branch' },
   { label: 'IFSC Code', type: 'text', name: 'ifsc_code', placeholder: 'Enter IFSC code' },
-  { label: 'Buy Quantity', type: 'number', name: 'buy_quantity', placeholder: 'Enter buying quantity' },
+  { label: 'Buy Quantity', type: '', name: 'buy_quantity', placeholder: 'Enter buying quantity' },
   { label: 'Amount', type: 'text', name: 'amount', placeholder: 'Enter amount' },
 ];
 

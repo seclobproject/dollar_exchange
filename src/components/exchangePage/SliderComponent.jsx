@@ -4,39 +4,9 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import img from '../../assets/images/exchangePage/currencyImg.png'
-const BASE_URL = "https://api.frankfurter.app/latest";
-const currencyNames = {
-  AUD: 'Australian Dollar',
-  BGN: 'Bulgarian Lev',
-  BRL: 'Brazilian Real',
-  CAD: 'Canadian Dollar',
-  CHF: 'Swiss Franc',
-  CNY: 'Chinese Yuan',
-  CZK: 'Czech Koruna',
-  DKK: 'Danish Krone',
-  EUR: 'Euro',
-  GBP: 'British Pound',
-  HKD: 'Hong Kong Dollar',
-  HUF: 'Hungarian Forint',
-  IDR: 'Indonesian Rupiah',
-  ILS: 'Israeli Shekel',
-  INR: 'Indian Rupee',
-  ISK: 'Icelandic Krona',
-  JPY: 'Japanese Yen',
-  KRW: 'South Korean Won',
-  MXN: 'Mexican Peso',
-  MYR: 'Malaysian Ringgit',
-  NOK: 'Norwegian Krone',
-  NZD: 'New Zealand Dollar',
-  PHP: 'Philippine Peso',
-  PLN: 'Polish Zloty',
-  RON: 'Romanian Leu',
-  SEK: 'Swedish Krona',
-  SGD: 'Singapore Dollar',
-  THB: 'Thai Baht',
-  TRY: 'Turkish Lira',
-  ZAR: 'South African Rand'
-};
+import {currencyNames} from './data'
+const BASE_URL = import.meta.env.VITE_CURRENCIES_URL2;
+
 
 function SliderComponent() {
   const [usdRates, setUsdRates] = useState({});
