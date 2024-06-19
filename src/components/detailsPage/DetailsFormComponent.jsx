@@ -1,30 +1,47 @@
 import React, { useState } from 'react';
 import userImg from "../../assets/images/userImg.png";
 import { MdOutlineEdit } from "react-icons/md";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { personalDetailsFields, bankAccountFields, accountDetailsFields, initialState } from './data'; 
+
+// Define validation schema
+const detailsSchema = Yup.object().shape({
+  name: Yup.string().min(2).max(25).required("Please enter your name"),
+  nick_name: Yup.string().min(2).max(25),
+  dob: Yup.date().required("Please enter your date of birth"),
+  gender: Yup.string().required("Please select your gender"),
+  marital_status: Yup.string().required("Please select your marital status"),
+  id_card: Yup.string().required("Please enter your ID card number"),
+  email: Yup.string().email("Invalid email format").required("Please enter your email"),
+  mobile: Yup.string().matches(/^\d{10}$/, "Invalid mobile number").required("Please enter your mobile number"),
+  country: Yup.string().required("Please select your country"),
+  address: Yup.string().required("Please enter your address"),
+  bank_name: Yup.string().required("Please enter your bank name"),
+  branch_name: Yup.string().required("Please enter your branch name"),
+  account_number: Yup.string().required("Please enter your account number"),
+  vaultizo_user_id: Yup.string().required("Please enter your user ID"),
+  account_creation_date: Yup.date().required("Please enter account creation date"),
+  vaultizo_referral_code: Yup.string()
+});
+
 function DetailsFormComponent() {
   const [referralCode, setReferralCode] = useState(''); // State to hold the referral code
-  const [fields, setFields] = useState(initialState);
+
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+    initialValues: initialState,
+    validationSchema: detailsSchema,
+    onSubmit: (values, { resetForm }) => {
+      console.log(values);
+      resetForm();
+    }
+  });
 
   const handleCopyClick = () => {
     navigator.clipboard.writeText(referralCode); // Copy the referral code to the clipboard
     alert('Referral code copied to clipboard'); // Optional: Notify the user
   };
 
-  const handleState = (e) => {
-    const { name, value } = e.target;
-    setFields((prev) => ({ ...prev, [name]: value }));
-  };
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(fields);
-    setFields(initialState);
-  };
-
-
-  
   return (
     <div>
       <div className="bg-custom-blue min-h-screen sm:-mt-2 md:-mt-4 -mt-0 flex items-center justify-center">
@@ -55,8 +72,9 @@ function DetailsFormComponent() {
                         name={name}
                         className="block w-full px-3 py-2 border border-gray-500 rounded-md bg-custom-blue text-gray-300"
                         defaultValue={defaultValue}
-                        onChange={handleState}
-                        value={fields[name]}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values[name]}
                       >
                         <option value="" disabled>Select {label.toLowerCase()}</option>
                         {options.map((option) => (
@@ -73,10 +91,14 @@ function DetailsFormComponent() {
                         className="block w-full px-3 py-2 border border-gray-500 rounded-md bg-custom-blue text-gray-300"
                         placeholder={placeholder}
                         defaultValue={defaultValue}
-                        onChange={handleState}
-                        value={fields[name]}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values[name]}
                       />
                     )}
+                    {touched[name] && errors[name] ? (
+                      <p className="form-error text-red-400">{errors[name]}</p>
+                    ) : null}
                   </div>
                 </div>
               ))}
@@ -95,9 +117,13 @@ function DetailsFormComponent() {
                       name={name}
                       className="block w-full px-3 py-2 border border-gray-500 rounded-md bg-custom-blue text-gray-300"
                       placeholder={placeholder}
-                      onChange={handleState}
-                      value={fields[name]}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values[name]}
                     />
+                    {touched[name] && errors[name] ? (
+                      <p className="form-error text-red-400">{errors[name]}</p>
+                    ) : null}
                   </div>
                 </div>
               ))}
@@ -116,9 +142,13 @@ function DetailsFormComponent() {
                       className="block w-full px-3 py-2 border border-gray-500 rounded-md bg-custom-blue text-white"
                       placeholder={placeholder}
                       defaultValue={defaultValue}
-                      onChange={handleState}
-                      value={fields[name]}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values[name]}
                     />
+                    {touched[name] && errors[name] ? (
+                      <p className="form-error text-red-400">{errors[name]}</p>
+                    ) : null}
                   </div>
                 </div>
               ))}
@@ -135,8 +165,9 @@ function DetailsFormComponent() {
                     value={referralCode}
                     onChange={(e) => {
                       setReferralCode(e.target.value);
-                      handleState(e);
+                      handleChange(e);
                     }}
+                    onBlur={handleBlur}
                     className="block w-full px-3 py-2 border border-gray-500 rounded-md bg-custom-blue text-gray-300"
                     placeholder="Enter referral code"
                   />
@@ -156,17 +187,23 @@ function DetailsFormComponent() {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
-                        d="M8 11V9a3 3 0 00-3-3H5a3 3 0 00-3 3v10a3 3 0 003 3h6a3 3 0 003-3v-1M16 5h6m-6 4h6m-6 4h6m-6 4h6"
+                        d="M8 7V4a1 1 0 011-1h9a1 1 0 011 1v12a1 1 0 01-1 1h-3m-4 0a1 1 0 00-1 1v3m0 0H5a1 1 0 01-1-1V8a1 1 0 011-1h3m4 0h4a1 1 0 011 1v5"
                       />
                     </svg>
                   </button>
                 </div>
+                {touched.vaultizo_referral_code && errors.vaultizo_referral_code ? (
+                  <p className="form-error text-red-400">{errors.vaultizo_referral_code}</p>
+                ) : null}
               </div>
             </div>
           </div>
+
+          <div className="mt-4">
           <button type="submit" className="ease-in hover:scale-90 md:w-60 w-full bg-custom-green text-black font-medium py-2 rounded-md mt-4 md:mt-6">
-            Save
-          </button>
+Save
+</button>
+          </div>
         </form>
       </div>
     </div>
@@ -174,3 +211,4 @@ function DetailsFormComponent() {
 }
 
 export default DetailsFormComponent;
+

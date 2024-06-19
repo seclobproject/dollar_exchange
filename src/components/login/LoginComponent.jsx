@@ -5,8 +5,22 @@ import { IoLogoApple } from "react-icons/io5";
 import img from "../../assets/images/authenticationPageImgs/loginImg.png";
 import img2 from "../../assets/images/logo.png";
 import Mobileimg from "../../assets/images/authenticationPageImgs/loginImgMobile.png";
-
+import { useFormik } from "formik";
+import { signInSchema } from "../../schemas";
 function LoginComponent() {
+  const initialValues = {
+    emailOrNumber: "",
+    password: "",
+    otp: "",
+  };
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: signInSchema,
+      onSubmit: (values) => {
+        console.log(values);
+      },
+    });
   return (
     <div className="flex flex-row">
       <img
@@ -46,7 +60,7 @@ function LoginComponent() {
           </div>
           {/* End of Create account text and image */}
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-6 relative">
               <label
                 htmlFor="emailOrPhone"
@@ -57,8 +71,17 @@ function LoginComponent() {
               <input
                 type="text"
                 id="emailOrPhone"
+                name="emailOrNumber"
+                value={values.emailOrNumber}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 className="p-2 w-full border-2  border-gray-200 focus:border-gray-400 text-gray-200 md:text-black  rounded-md focus:outline-none md:bg-white bg-custom-blue focus:ring-opacity-50"
               />
+              {touched.emailOrNumber && errors.emailOrNumber ? (
+                <p className="form-error sm:text-red-600 text-red-400">
+                  {errors.emailOrNumber}
+                </p>
+              ) : null}{" "}
             </div>
 
             <div className="mb-6 relative">
@@ -71,8 +94,17 @@ function LoginComponent() {
               <input
                 type="password"
                 id="password"
+                name="password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 className="p-2 w-full border-2  border-gray-200 focus:border-gray-400 text-gray-200 md:text-black  rounded-md focus:outline-none md:bg-white bg-custom-blue focus:ring-opacity-50"
               />
+              {touched.password && errors.password ? (
+                <p className="form-error sm:text-red-600 text-red-400">
+                  {errors.password}
+                </p>
+              ) : null}
             </div>
             <div className="mb-6 relative">
               <label
@@ -83,9 +115,18 @@ function LoginComponent() {
               </label>
               <input
                 type="password"
-                id="confirmPassword"
+                id="otp"
+                name="otp"
+                value={values.otp}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 className="p-2   border-2  border-gray-200 focus:border-gray-400 w-full text-gray-200 md:text-black  rounded-md focus:outline-none md:bg-white bg-custom-blue focus:ring-opacity-50"
               />
+              {touched.otp && errors.otp ? (
+                <p className="form-error sm:text-red-600 text-red-400">
+                  {errors.otp}
+                </p>
+              ) : null}
               <div className="mb-6 flex justify-between pt-2">
                 <span className="text-sm underline md:text-md md:font-medium font-normal md:text-gray-700 text-white cursor-pointer">
                   Get OTP

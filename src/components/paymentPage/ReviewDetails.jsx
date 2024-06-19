@@ -11,7 +11,6 @@ const ReviewDetails = ({ fields, paymentMethod, handleBack, setCurrentStep }) =>
   };
 
   const handlePay = () => {
-    // Handle the pay action here
     alert("Payment process initiated.");
   };
 

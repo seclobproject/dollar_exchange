@@ -3,7 +3,7 @@ const today = new Date().toISOString().split('T')[0];
 
 export const personalDetailsFields = [
     { label: 'Name', type: 'text', name: 'name', placeholder: 'Enter your name' },
-    { label: 'Nick Name', type: 'text', name: 'nick_name', placeholder: 'Enter your nick name' },
+    { label: 'Nick Name', type: 'text', name: 'nick_name', placeholder: 'Enter your nick name', },
     { label: 'Date of Birth', type: 'date', name: 'dob', placeholder: 'YYYY-MM-DD', defaultValue: today },
     { label: 'Gender', type: 'select', name: 'gender', options: ['Male', 'Female', 'Other'], defaultValue: '' },
     { label: 'Marital Status', type: 'select', name: 'marital_status', options: ['Single', 'Married', 'Divorced', 'Widowed'], defaultValue: '' },

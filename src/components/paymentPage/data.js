@@ -17,8 +17,8 @@ export const addressFields = [
  
 ];
 export const bankDetailsFields = [
-  { label: 'Beneficiary Name', type: 'text', name: 'beneficiary_name', placeholder: 'Enter beneficiary name' },
-  { label: 'Branch', type: 'text', name: 'branch', placeholder: 'Enter branch' },
+  { label: 'Beneficiary Name', type: 'text', name: 'account_holder_name', placeholder: 'Enter beneficiary name' },
+  { label: 'Branch', type: 'text', name: 'branch_name', placeholder: 'Enter branch' },
   { label: 'IFSC Code', type: 'text', name: 'ifsc_code', placeholder: 'Enter IFSC code' },
   { label: 'Buy Quantity', type: 'number', name: 'buy_quantity', placeholder: 'Enter buying quantity' },
   { label: 'Amount', type: 'text', name: 'amount', placeholder: 'Enter amount' },
@@ -39,11 +39,5 @@ export const initialState = {
   country: '',
   full_address: '',
   post_code: '',
-  beneficiary_name: '',
-  branch: '',
-  ifsc_code: '',
-  bank_name: '',
-  account_no: '',
-  account_type: '',
 };
   

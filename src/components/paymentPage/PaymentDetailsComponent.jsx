@@ -14,13 +14,8 @@ function PaymentDetailsComponent() {
   const [isReview, setIsReview] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
 
-  const handleState = (e) => {
-    const { name, value } = e.target;
-    setFields((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleData = (data) => {
+    console.log(data);
     setIsReview(true);
     setCurrentStep(2);
   };
@@ -49,39 +44,27 @@ function PaymentDetailsComponent() {
           ) : (
             ""
           )}
-          php Copy code
           <div className="md:hidden">
             <OrderSummary />
           </div>
           {!isReview ? (
-            <form
+            <div
               className="order-3 md:order-3 text-white p-6 rounded shadow-md w-full bg-custom-blue"
-              onSubmit={handleSubmit}
+              // onSubmit={handleSubmit}
             >
               {paymentMethod === "Cash on delivery" ? (
                 <CashOnDeliveryDetails
-                  fields={fields}
-                  handleState={handleState}
+                  handleData={handleData}
+                  handleBack={handleBack}
                 />
               ) : (
-                <BankAccountDetails fields={fields} handleState={handleState} />
+                <BankAccountDetails
+                  handleData={handleData}
+                  handleBack={handleBack}
+                />
               )}
-              <div className="flex flex-col ">
-                <button
-                  type="submit"
-                  className="ease-in hover:scale-90 md:w-60 w-full bg-custom-green text-black font-medium py-2 rounded-md mt-4 md:mt-6"
-                >
-                  Continue
-                </button>
-                <button
-                  type="button"
-                  onClick={handleBack}
-                  className="ease-in hover:scale-90 md:w-60 w-full bg-custom-blue border border-custom-green text-custom-green font-medium py-2 rounded-md mt-4 md:mt-6"
-                >
-                  Back
-                </button>
-              </div>
-            </form>
+              <div className="flex flex-col "></div>
+            </div>
           ) : (
             <ReviewDetails
               fields={fields}

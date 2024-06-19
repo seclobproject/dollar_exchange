@@ -4,7 +4,6 @@ import Header from '../components/homePage/Header'
 function Details() {
   return (
     <div >
-        <Header/>
       <DetailsFormComponent/>
     </div>
   )

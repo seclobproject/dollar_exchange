@@ -11,7 +11,6 @@ import Footer from "../components/homePage/Footer";
 function HomePage() {
   return (
     <div className="bg-custom-blue ">
-      <Header />
       <Hero />
       <OfferSlider />
       <Details />

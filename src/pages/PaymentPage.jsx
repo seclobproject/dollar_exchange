@@ -4,7 +4,6 @@ import Header from "../components/homePage/Header";
 function PaymentPage() {
   return (
     <div>
-      <Header/>
       <PaymentDetailsComponent/>
     </div>
   )

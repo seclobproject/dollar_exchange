@@ -4,7 +4,6 @@ import Header from "../components/homePage/Header";
 function PaymentSuccess() {
   return (
     <div>
-      <Header/>
     <PaymentSuccessComponent/>
     </div>
   )
