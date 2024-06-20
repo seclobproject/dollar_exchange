@@ -3,9 +3,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import useConversionRate from "../../custom_hooks/useConversionRate";  // Import the custom hook
 import { bankDetailsFields, bankAccountFields } from "./data";
-import {bankDetailsInitialState} from '../../schemas'
+import {bankDetailsInitialState,bankDetailsSchema} from '../../schemas'
 
-const BankAccountDetails = ({   handleData, handleBack,setBuyQuantity,setAmount}) => {
+const BankAccountDetails = ({   handleData, handleBack,setBuyQuantity,setAmount,location,setLocationError}) => {
   const conversionRate = useConversionRate("USDT", "AED");
 
 
@@ -13,6 +13,10 @@ const BankAccountDetails = ({   handleData, handleBack,setBuyQuantity,setAmount}
     initialValues: bankDetailsInitialState,
     validationSchema: bankDetailsSchema,
     onSubmit: (values, { resetForm }) => {
+      if (!location) {
+        setLocationError("location", "Please select a location");
+        return;
+      }
       handleData(values);
       resetForm();
     },

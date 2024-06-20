@@ -14,8 +14,11 @@ function PaymentDetailsComponent() {
   const [details, setDetails] = useState({});
   const [buyQuantity, setBuyQuantity] = useState("");
   const [amount, setAmount] = useState("");
+  const [locationError, setLocationError] = useState("");
 
   const handleData = (data) => {
+  
+    console.log(location);
     setDetails(data);
     setIsReview(true);
     setCurrentStep(2);
@@ -41,6 +44,8 @@ function PaymentDetailsComponent() {
               setPaymentMethod={setPaymentMethod}
               location={location}
               setLocation={setLocation}
+              locationError={locationError}
+              setLocationError={setLocationError}
             />
           ) : (
             ""
@@ -56,6 +61,8 @@ function PaymentDetailsComponent() {
                   handleBack={handleBack}
                   setBuyQuantity={setBuyQuantity}
                   setAmount={setAmount}
+                  location={location}
+                  setLocationError={setLocationError}
                 />
               ) : (
                 <BankAccountDetails
@@ -63,6 +70,8 @@ function PaymentDetailsComponent() {
                   handleBack={handleBack}
                   setBuyQuantity={setBuyQuantity}
                   setAmount={setAmount}
+                  location={location}
+                  setLocationError={setLocationError}
                 />
               )}
               <div className="flex flex-col "></div>

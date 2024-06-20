@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TiArrowSortedDown } from "react-icons/ti"; // Import down arrow icon from react-icons
 
-function RadioButtons ({ paymentMethod, location, setPaymentMethod, setLocation }) {
+function RadioButtons ({ paymentMethod, setPaymentMethod, setLocation,locationError,setLocationError }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
  
 
@@ -11,7 +11,8 @@ function RadioButtons ({ paymentMethod, location, setPaymentMethod, setLocation 
 
   const handleLocationChange = (country) => {
     setLocation(country);
-    setIsDropdownOpen(false); // Close dropdown after selecting an option
+    setLocationError("");
+    setIsDropdownOpen(false); 
   };
   return (
     <div className="">
@@ -54,9 +55,9 @@ function RadioButtons ({ paymentMethod, location, setPaymentMethod, setLocation 
             </label>
           </div>
 
-          <div className="relative">
+          <div className="relative min-h-20">
             <div
-              className="flex items-center cursor-pointer text-sm md:text-xs lg:text-lg pt-1 pr-1"
+              className="flex items-center cursor-pointer text-sm md:text-xs lg:text-lg lg:pt-7 xs:pt-8 pt-0 pr-1"
               onClick={() => setIsDropdownOpen((prev) => !prev)}
             >
               <span className="mr-2 text-sm md:text-xs lg:text-lg">Location</span>
@@ -93,7 +94,9 @@ function RadioButtons ({ paymentMethod, location, setPaymentMethod, setLocation 
                   </div>
                 </div>
               </div>
+              
             )}
+              {locationError && <p className="text-red-500 text-sm">{locationError}</p>}
           </div>
         </div>
       </div>

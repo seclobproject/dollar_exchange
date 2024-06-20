@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import useConversionRate from "../../custom_hooks/useConversionRate";  // Import the custom hook
 import { personalDetailsFields, addressFields } from "./data";
 import {codInitialState,detailsSchema} from '../../schemas/index'
-const CashOnDeliveryDetails = ({handleData, handleBack,setBuyQuantity,setAmount}) => {
+const CashOnDeliveryDetails = ({handleData, handleBack,setBuyQuantity,setAmount,location,setLocationError}) => {
 
   const conversionRate = useConversionRate("USDT", "AED"); 
   
@@ -12,6 +12,11 @@ const CashOnDeliveryDetails = ({handleData, handleBack,setBuyQuantity,setAmount}
     initialValues: codInitialState,
     validationSchema: detailsSchema,
     onSubmit: (values, { resetForm }) => {
+      if (!location) {
+        setLocationError("location", "Please select a location");
+        return;
+      }
+     
       handleData(values);
       resetForm();
     },

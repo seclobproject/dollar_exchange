@@ -11,7 +11,7 @@ import Details from "./pages/Details";
 import PaymentPage from "./pages/PaymentPage";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Header from "./components/homePage/Header";
-
+import ErrorPage from './pages/ErrorPage'
 function App() {
   return (
     <Router>
@@ -38,6 +38,7 @@ function AppContent() {
         <Route path="/details-form" element={<Details />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );

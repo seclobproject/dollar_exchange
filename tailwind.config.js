@@ -24,7 +24,7 @@ export default {
       screens: {
         'xs': '500px', 
         'xxs': '420px',
-      'xxss':'360px'
+        'xxss':'360px'
       },
 
     },
