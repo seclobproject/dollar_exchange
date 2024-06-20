@@ -36,6 +36,15 @@ export const detailsSchema = Yup.object().shape({
   post_code: Yup.string().required("Please enter your post code"),
 });
 
+export const forgotPasswordSchema=Yup.object().shape({
+  emailOrNumber: emailOrPhoneValidation,
+});
+export const newPasswordSchema=Yup.object().shape({
+  password: Yup.string().min(6).required("Please enter your password"),
+  confirmPassword: Yup.string()
+    .required()
+    .oneOf([Yup.ref("password"), null], "Password must match"),
+});
 
 
 export const codInitialState = {
@@ -59,6 +68,18 @@ export const bankDetailsInitialState = {
   account_no: '',
   account_type: '',
 };
+export const signupInitialValues = {
+  name: "",
+  emailOrNumber: "",
+  password: "",
+  country: "",
+  confirmPassword: "",
+};
+export const signinInitialValues = {
+  emailOrNumber: "",
+  password: "",
+  otp: "",
+};
 export const bankDetailsSchema = Yup.object().shape({
   account_holder_name: Yup.string().required("Please enter the account holder's name"),
   branch_name: Yup.string().required("Please enter the branch name"),
@@ -69,4 +90,6 @@ export const bankDetailsSchema = Yup.object().shape({
   account_no: Yup.string().min(11).max(17).required("Please enter the account number"),
   account_type: Yup.string().required("Please select the account type"),
 });
+
+
 

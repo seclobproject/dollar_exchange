@@ -12,7 +12,6 @@ function OtpVerificationComponent() {
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
     setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
-    // Focus next input
     if (element.nextSibling) {
       element.nextSibling.focus();
     }
@@ -72,6 +71,7 @@ function OtpVerificationComponent() {
                       value={data}
                       onChange={e => handleChange(e.target, index)}
                       onFocus={e => e.target.select()}
+                      required
                     />
                   );
                 })}

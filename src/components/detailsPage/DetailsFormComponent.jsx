@@ -26,7 +26,7 @@ const detailsSchema = Yup.object().shape({
 });
 
 function DetailsFormComponent() {
-  const [referralCode, setReferralCode] = useState(''); // State to hold the referral code
+  const [referralCode, setReferralCode] = useState('');
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: initialState,

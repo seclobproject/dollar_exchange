@@ -5,8 +5,25 @@ import { IoLogoApple } from "react-icons/io5";
 import img from "../../assets/images/authenticationPageImgs/newPswrdImg.png";
 import img2 from "../../assets/images/logo.png";
 import Mobileimg from "../../assets/images/authenticationPageImgs/newPswrd-sm.png";
+import { useFormik } from "formik";
+import { newPasswordSchema } from "../../schemas";
 
 function NewPswrd() {
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+  useFormik({
+    initialValues: { password: "" ,confirmPassword:""},
+    validationSchema: newPasswordSchema,
+    onSubmit: async (values,{resetForm}) => {
+      try {
+        console.log(values);
+
+        resetForm();
+        // Handle the form submission
+      } catch (err) {
+        // Handle the error
+      }
+    },
+  });
   return (
     <div className="flex flex-row ">
       <img
@@ -42,7 +59,7 @@ function NewPswrd() {
 
             {/* End of Create account text and image */}
 
-            <form>
+            <form onSubmit={handleSubmit}>
             <div className="mb-4 relative">
               <label
                 htmlFor="password"
@@ -53,8 +70,17 @@ function NewPswrd() {
               <input
                 type="password"
                 id="password"
+                name="password"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 className="p-2 w-full border-2  border-gray-200 focus:border-gray-400 text-gray-200 md:text-black  rounded-md focus:outline-none md:bg-white bg-custom-blue focus:ring-opacity-50"
               />
+                {touched.password && errors.password ? (
+                <p className="form-error sm:text-red-600 text-red-400">
+                  {errors.password}
+                </p>
+              ) : null}
             </div>
             <div className="mb-4 relative">
               <label
@@ -66,8 +92,17 @@ function NewPswrd() {
               <input
                 type="password"
                 id="confirmPassword"
+                name="confirmPassword"
+                value={values.confirmPassword}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 className="p-2   border-2  border-gray-200 focus:border-gray-400 w-full text-gray-200 md:text-black  rounded-md focus:outline-none md:bg-white bg-custom-blue focus:ring-opacity-50"
               />
+                 {touched.confirmPassword && errors.confirmPassword ? (
+                <p className="form-error sm:text-red-600 text-red-400">
+                  {errors.confirmPassword}
+                </p>
+              ) : null}
             </div>
 
               <button

@@ -5,21 +5,25 @@ import Mobileimg from "../../assets/images/authenticationPageImgs/signupImg2.png
 import SocialMediaButtonsLg from "./SocialMediaButtonsLg";
 import SocialMediaButtonsSm from "./SocialMediaButtonsSm";
 import { useFormik } from "formik";
-import { signUpSchema } from "../../schemas";
+import { signUpSchema, signupInitialValues } from "../../schemas";
+import authAPI from '../../apis/authApi'
+const { doSignup } = authAPI();
+
+
 function SignUp() {
-  const initialValues = {
-    name: "",
-    emailOrNumber: "",
-    password: "",
-    country: "",
-    confirmPassword: "",
-  };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
-      initialValues: initialValues,
+      initialValues: signupInitialValues,
       validationSchema: signUpSchema,
-      onSubmit: (values) => {
+      onSubmit: async (values) => {
+
         console.log(values);
+
+        try {
+          await doSignup({ ...state });
+        } catch (err) {
+
+        }
       },
     });
 
@@ -77,7 +81,9 @@ function SignUp() {
                 className="p-2 w-full text-gray-200 md:text-black  rounded-md border-2  border-gray-200 focus:border-gray-400 focus:outline-none  md:bg-white bg-custom-blue focus:ring-opacity-50"
               />
               {touched.name && errors.name ? (
-                <p className="form-error sm:text-red-600 text-red-400">{errors.name}</p>
+                <p className="form-error sm:text-red-600 text-red-400">
+                  {errors.name}
+                </p>
               ) : null}{" "}
             </div>
 
@@ -125,7 +131,9 @@ function SignUp() {
                   {/* Add more countries as needed */}
                 </select>
                 {touched.country && errors.country ? (
-                  <p className="form-error sm:text-red-600 text-red-400">{errors.country}</p>
+                  <p className="form-error sm:text-red-600 text-red-400">
+                    {errors.country}
+                  </p>
                 ) : null}{" "}
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                   <svg
@@ -155,7 +163,9 @@ function SignUp() {
                 className="p-2 w-full border-2  border-gray-200 focus:border-gray-400 text-gray-200 md:text-black  rounded-md focus:outline-none md:bg-white bg-custom-blue focus:ring-opacity-50"
               />
               {touched.password && errors.password ? (
-                <p className="form-error sm:text-red-600 text-red-400">{errors.password}</p>
+                <p className="form-error sm:text-red-600 text-red-400">
+                  {errors.password}
+                </p>
               ) : null}
             </div>
             <div className="mb-4 relative">
@@ -205,11 +215,11 @@ function SignUp() {
             </button>
           </form>
           {/* social media buttons   */}
-           <SocialMediaButtonsLg/>
+          <SocialMediaButtonsLg />
           {/* end of social media buttons   */}
-          
+
           {/* social media buttons mobile */}
-          <SocialMediaButtonsSm/>
+          <SocialMediaButtonsSm />
           {/* end of social media buttons mobile */}
         </div>
       </div>

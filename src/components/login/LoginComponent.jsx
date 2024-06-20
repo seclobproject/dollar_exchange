@@ -6,19 +6,22 @@ import img from "../../assets/images/authenticationPageImgs/loginImg.png";
 import img2 from "../../assets/images/logo.png";
 import Mobileimg from "../../assets/images/authenticationPageImgs/loginImgMobile.png";
 import { useFormik } from "formik";
-import { signInSchema } from "../../schemas";
+import { signInSchema,signinInitialValues } from "../../schemas";
+import authAPI from '../../apis/authApi'
+const { doSignin } = authAPI();
+
+
 function LoginComponent() {
-  const initialValues = {
-    emailOrNumber: "",
-    password: "",
-    otp: "",
-  };
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
-      initialValues: initialValues,
+      initialValues: signinInitialValues,
       validationSchema: signInSchema,
-      onSubmit: (values) => {
-        console.log(values);
+      onSubmit:async(values) => {
+        try {
+          await doSignin({ ...state });
+        } catch (err) {
+
+        }
       },
     });
   return (
