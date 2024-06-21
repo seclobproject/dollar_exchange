@@ -1,15 +1,18 @@
 import axiosConfig from "../config/axiosConfig";
  const authAPI = () => {
-    const doSignup = async () => {
-      const res = await axiosConfig.post("/auth/register");
-      return res;
+    const doSignup = async (data) => {
+      const res = await axiosConfig.post("/user/register",data,{headers:{
+        'Content-Type': 'application/json',
+      }});
+
+    return res.data;
     };
   
-    const doSignin = async () => {
-      const res = await axiosConfig.post("/auth/login");
+    const sendOtp = async (data) => {
+      const res = await axiosConfig.post("/user/login",data);
       return res;
     };
-    return { doSignup, doSignin };
+    return { doSignup, sendOtp };
 }  
 
 export default authAPI

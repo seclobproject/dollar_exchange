@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { IoLogoApple } from "react-icons/io5";
@@ -6,26 +6,33 @@ import img from "../../assets/images/authenticationPageImgs/loginImg.png";
 import img2 from "../../assets/images/logo.png";
 import Mobileimg from "../../assets/images/authenticationPageImgs/loginImgMobile.png";
 import { useFormik } from "formik";
-import { signInSchema,signinInitialValues } from "../../schemas";
-import authAPI from '../../apis/authApi'
-const { doSignin } = authAPI();
-
+import { signInSchema, signinInitialValues } from "../../schemas";
+import authAPI from "../../apis/authApi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import useHandleGetOtp from "../../custom_hooks/useHandleGetOtp";
+const { sendOtp } = authAPI();
 
 function LoginComponent() {
+
+  const { showRequestButton, countdown, handleGetOtp } = useHandleGetOtp()
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: signinInitialValues,
       validationSchema: signInSchema,
-      onSubmit:async(values) => {
+      onSubmit: async (values) => {
         try {
-          await doSignin({ ...state });
-        } catch (err) {
-
-        }
+        } catch (err) {}
       },
     });
+
+
+
+
   return (
     <div className="flex flex-row">
+      <ToastContainer />
       <img
         src={img}
         alt=""
@@ -131,15 +138,21 @@ function LoginComponent() {
                 </p>
               ) : null}
               <div className="mb-6 flex justify-between pt-2">
-                <span className="text-sm underline md:text-md md:font-medium font-normal md:text-gray-700 text-white cursor-pointer">
-                  Get OTP
-                </span>
+                {showRequestButton ? (
+                  <span
+                  onClick={() => handleGetOtp(values)}
+                    className="text-sm underline md:text-md md:font-medium font-normal md:text-gray-700 text-white cursor-pointer"
+                  >
+                    Get OTP
+                  </span>
+                ) : (
+                  <span className="text-gray-500">{countdown} seconds</span>
+                )}
                 <span className="text-sm underline md:text-md md:font-medium font-normal md:text-gray-700 text-white cursor-pointer">
                   Forgot Password
                 </span>
               </div>
             </div>
-
             <button
               type="submit"
               className="w-full font-medium md:bg-button-color bg-white md:text-white text-black py-2 px-4 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50"

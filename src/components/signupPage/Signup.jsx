@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import img from "../../assets/images/authenticationPageImgs/signupImg.png";
 import img2 from "../../assets/images/logo.png";
 import Mobileimg from "../../assets/images/authenticationPageImgs/signupImg2.png";
@@ -6,23 +7,47 @@ import SocialMediaButtonsLg from "./SocialMediaButtonsLg";
 import SocialMediaButtonsSm from "./SocialMediaButtonsSm";
 import { useFormik } from "formik";
 import { signUpSchema, signupInitialValues } from "../../schemas";
-import authAPI from '../../apis/authApi'
+import authAPI from "../../apis/authApi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const { doSignup } = authAPI();
 
-
 function SignUp() {
+  const navigate = useNavigate();
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: signupInitialValues,
       validationSchema: signUpSchema,
       onSubmit: async (values) => {
-
-        console.log(values);
-
+        const data = {
+          name: values.name,
+          email: values.emailOrNumber.includes("@")
+            ? values.emailOrNumber
+            : undefined,
+          phone: !values.emailOrNumber.includes("@")
+            ? values.emailOrNumber
+            : undefined,
+          country: values.country,
+          password: values.password,
+        };
         try {
-          await doSignup({ ...state });
+          const res = await doSignup(data);
+          toast.success(
+            <div>
+              Sign up successful
+              <br />
+              Redirecting to login...
+            </div>,
+            {
+              position: "top-center",
+              onClose: () => navigate("/login"),
+            }
+          );
         } catch (err) {
-
+          toast.error("Sign up failed", {
+            position: "top-center",
+          });
         }
       },
     });
@@ -34,6 +59,8 @@ function SignUp() {
         alt=""
         className="hidden md:block md:h-[200px] md:w-[170px] lg:w-[220px] lg:h-[250px] xl:w-[380px] xl:h-[420px]"
       />
+      <ToastContainer />
+
       <div className="hidden md:flex flex-col gap-y-4 pb-20 xl:pl-7 pl-0 text-white my-auto   items-start">
         <img className="w-[160px] " src={img2} alt="" />
         <p className="text-2xl font-bold">

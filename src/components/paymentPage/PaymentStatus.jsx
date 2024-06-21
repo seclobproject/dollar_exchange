@@ -4,7 +4,7 @@ import { TiTick } from "react-icons/ti";
 function PaymentStatus({ currentStep }) {
   return (
     <div className="px-6 ">
-      <div className="flex md:items-center items-start  text-[9px] xxs:text-sm  lg:text-base space-x-2 mb-2 ">
+      <div className="flex md:items-center items-start  text-[8px] xxss:text-[10px] xs:text-sm  lg:text-base space-x-2 mb-2 ">
         <div className="flex items-center space-x-2">
           <span className="text-custom-green">Payment Details</span>
           <div className="h-px w-4 bg-custom-green"></div>
