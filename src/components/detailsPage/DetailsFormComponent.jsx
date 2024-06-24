@@ -3,8 +3,9 @@ import userImg from "../../assets/images/userImg.png";
 import { MdOutlineEdit } from "react-icons/md";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import authAPI from "../../apis/authApi";
 import { personalDetailsFields, bankAccountFields, accountDetailsFields, initialState } from './data'; 
-
+const { personalDetails } = authAPI();
 // Define validation schema
 const detailsSchema = Yup.object().shape({
   name: Yup.string().min(2).max(25).required("Please enter your name"),
@@ -31,9 +32,15 @@ function DetailsFormComponent() {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: initialState,
     validationSchema: detailsSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      resetForm();
+    onSubmit: async(values, { resetForm }) => {
+      try{
+        const res = await personalDetails(values);
+        resetForm();
+
+      }
+      catch(err){
+        console.log(err);
+      }
     }
   });
 

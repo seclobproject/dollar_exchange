@@ -15,10 +15,10 @@ function RadioButtons({ paymentMethod, setPaymentMethod, setLocation, locationEr
   };
 
   return (
-    <div className="text-white p-6 w-full">
-      <h2 className="md:text-lg text-md font-normal mb-2">Pay with:</h2>
+    <div className="text-white px-6 py-3 xs:py-6 w-full">
+      <h2 className="md:text-lg text-sm xs:text-md font-normal mb-2">Pay with:</h2>
       <div className="flex xs:flex-row flex-col gap-4">
-        <div className="flex items-center gap-2 text-xs xxss:text-sm md:text-xs lg:text-lg">
+        <div className="flex items-center gap-2 text-[10px] xxss:text-sm md:text-xs lg:text-lg">
           <label className="flex items-center">
             <input
               type="radio"

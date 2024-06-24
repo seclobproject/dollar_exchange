@@ -182,24 +182,24 @@ function LoginComponent() {
             </div>
             <div className="space-y-4">
               <button className="flex items-center justify-center w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50">
-                <FcGoogle className="mr-2" /> Sign up with Google
+                <FcGoogle className="mr-2" /> Login with Google
               </button>
               <button className="flex items-center justify-center w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50">
-                <BsFacebook className="mr-2 text-blue-600" /> Sign up with
+                <BsFacebook className="mr-2 text-blue-600" /> Login with
                 Facebook
               </button>
               <button className="flex items-center justify-center w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50">
-                <IoLogoApple className="mr-2" /> Sign up with Apple
+                <IoLogoApple className="mr-2" /> Login with Apple
               </button>
             </div>
             <div className="mt-6 text-center mb-2">
               <p className="text-gray-700">
-                Already have an account?{" "}
+                New User?{" "}
                 <a
-                  href="#"
+                  href="/signup"
                   className="text-button-color font-bold hover:underline"
                 >
-                  LOGIN HERE
+                  SIGN UP HERE
                 </a>
               </p>
             </div>
@@ -209,7 +209,7 @@ function LoginComponent() {
           <div className="md:hidden mt-6 flex flex-col items-center">
             <p className="text-gray-300 text-sm sm:text-md mb-2">
               New User?{" "}
-              <a href="#" className="text-blue-500 font-normal hover:underline">
+              <a href="/signup" className="text-blue-500 font-normal hover:underline">
                 Sign Up Here
               </a>
             </p>

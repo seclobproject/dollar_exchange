@@ -2,12 +2,13 @@ import React from 'react'
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { IoLogoApple } from "react-icons/io5";
+
 function SocialMediaButtonsSm() {
   return (
     <div className="md:hidden mt-6 flex flex-col items-center">
     <p className="text-gray-300 text-sm sm:text-md mb-2">
       Already have an account?{" "}
-      <a href="#" className="text-blue-500 font-normal hover:underline">
+      <a href="/login" className="text-blue-500 font-normal hover:underline">
         Login
       </a>
     </p>

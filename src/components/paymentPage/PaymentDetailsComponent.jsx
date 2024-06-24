@@ -34,7 +34,7 @@ function PaymentDetailsComponent() {
       <hr className="h-px bg-gray-200 border-0" />
       <div className="bg-custom-blue min-h-screen xl:pl-24 lg:pl-12 md:pl-8 flex md:flex-row flex-col">
         <div className="w-full md:w-2/3 flex flex-col">
-          <h1 className="md:text-xl text-lg underline p-6 text-white underline-offset-8">
+          <h1 className="md:text-xl text-sm  xs:text-md  underline px-6 py-4 xs:py-6 text-white underline-offset-8">
             {!isReview ? "Buyer Payment Details" : "Review"}
           </h1>
           <PaymentStatus currentStep={currentStep} />

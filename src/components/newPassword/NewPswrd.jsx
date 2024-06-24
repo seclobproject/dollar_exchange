@@ -7,7 +7,12 @@ import img2 from "../../assets/images/logo.png";
 import Mobileimg from "../../assets/images/authenticationPageImgs/newPswrd-sm.png";
 import { useFormik } from "formik";
 import { newPasswordSchema } from "../../schemas";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import authAPI from "../../apis/authApi";
 
+const { newPassword } = authAPI();
 function NewPswrd() {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
   useFormik({
@@ -16,7 +21,7 @@ function NewPswrd() {
     onSubmit: async (values,{resetForm}) => {
       try {
         console.log(values);
-
+        const res = await newPassword(values);
         resetForm();
         // Handle the form submission
       } catch (err) {

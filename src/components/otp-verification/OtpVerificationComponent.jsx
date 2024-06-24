@@ -5,8 +5,13 @@ import { IoLogoApple } from "react-icons/io5";
 import img from "../../assets/images/authenticationPageImgs/otpPageImg.png";
 import img2 from "../../assets/images/logo.png";
 import Mobileimg from "../../assets/images/authenticationPageImgs/otpPageImgMobile.png";
-
+import authAPI from "../../apis/authApi";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const { confirmOtp } = authAPI();
 function OtpVerificationComponent() {
+  const navigate=useNavigate()
   const [otp, setOtp] = useState(["", "", "", "", ""]);
 
   const handleChange = (element, index) => {
@@ -17,15 +22,34 @@ function OtpVerificationComponent() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async(e) => {
     e.preventDefault();
-    const enteredOtp = otp.join("");
-    console.log("Entered OTP: ", enteredOtp);
-    setOtp(["", "", "", "", ""])
+    try{
+      const enteredOtp = otp.join("");
+      const res = await confirmOtp({ otp: enteredOtp });
+      toast.success("You are verified,create new password", {
+        position: "top-center",
+      })
+      setTimeout(() => {
+        navigate("/new-password");
+      }, 2500);
+
+      setOtp(["", "", "", "", ""])
+       
+    }
+    catch(err){
+      toast.error("Otp expired or invalid otp", {
+        position: "top-center",
+      });
+    }finally{
+
+    }
+
   };
 
   return (
     <div className="flex flex-row ">
+           <ToastContainer />
       <img
         src={img}
         alt=""

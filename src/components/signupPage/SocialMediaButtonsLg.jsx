@@ -26,7 +26,7 @@ function SocialMediaButtonsLg() {
       <p className="text-gray-700">
         Already have an account?{" "}
         <a
-          href="#"
+          href="/login"
           className="text-button-color font-bold hover:underline"
         >
           LOGIN HERE

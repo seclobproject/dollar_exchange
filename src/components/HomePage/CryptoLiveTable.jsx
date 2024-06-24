@@ -15,7 +15,6 @@ function Table() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true); 
         const response = await axios.get(
           URL,{
             headers: {
@@ -24,12 +23,11 @@ function Table() {
             }
           }
         );
+        setLoading(false);
         setCryptoData(response.data.result);
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false); // Stop loading
-      }
+      } 
     };
 
     fetchData();
@@ -143,7 +141,7 @@ function Table() {
                     <td className="px-6 py-4">{item.volume}</td>
                   </tr>
                 ))
-              ) : (
+              ) :  (
                 <tr>
                   <td colSpan="9" className="text-center py-4">
                     No matching results found.

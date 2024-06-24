@@ -20,7 +20,29 @@ import axiosConfig from '../config/axiosConfig';
       const res = await axiosConfig.post("/user/login-verifed",data);
       return res.data;
     };
-    return { doSignup, sendOtp, verifyOtp };
+
+    const personalDetails = async (data) => {
+      const res = await axiosConfig.post("/user/addDetails",data);
+      return res.data;
+    };
+
+    const forgotPassword = async (data) => {
+      console.log(data);
+      const res = await axiosConfig.post("/user/newPassOtp",data);
+      return res.data;
+    };
+    const confirmOtp = async (data) => {
+      console.log(data);
+      const res = await axiosConfig.post("/user/verifiedOtp",data);
+      return res.data;
+    };
+    const newPassword = async (data) => {
+    
+      console.log(data);
+      const res = await axiosConfig.patch("/user/change-password",data);
+      return res.data;
+    };
+    return { doSignup, sendOtp, verifyOtp,personalDetails,forgotPassword,confirmOtp ,newPassword};
 }  
 
 export default authAPI

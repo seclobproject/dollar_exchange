@@ -6,9 +6,14 @@ import img from "../../assets/images/authenticationPageImgs/frgt-password-lg.png
 import img2 from "../../assets/images/logo.png";
 import Mobileimg from "../../assets/images/authenticationPageImgs/frgt-pswrd-sm.png";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { forgotPasswordSchema } from "../../schemas";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import authAPI from "../../apis/authApi";
+const { forgotPassword } = authAPI();
 function FrgtPswrd() {
+  const navigate = useNavigate();
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: { emailOrNumber: "" },
@@ -16,15 +21,41 @@ function FrgtPswrd() {
       onSubmit: async (values) => {
         console.log(values);
         try {
-          // Handle the form submission
+          const data = {
+            email: values.emailOrNumber.includes("@")
+              ? values.emailOrNumber
+              : undefined,
+            phone: !values.emailOrNumber.includes("@")
+              ? values.emailOrNumber
+              : undefined,
+          };
+          const res = await forgotPassword(data);
+          toast.success("Otp has send to your mail ", {
+            position: "top-center",
+          })
+          setTimeout(() => {
+            navigate("/otp-verification");
+          }, 2500);
+
+       
+
+          
         } catch (err) {
+          console.log(err);
           // Handle the error
+          toast.error("please try again", {
+            position: "top-center",
+          });
         }
       },
     });
+  // const handleOtp = () => {
+  //   navigate("/otp-verification");
+  // };
 
   return (
     <div className="flex flex-row">
+     <ToastContainer />
       <img
         src={img}
         alt=""
@@ -79,6 +110,7 @@ function FrgtPswrd() {
               </div>
               <button
                 type="submit"
+                // onClick={handleOtp}
                 className="w-full font-medium md:bg-button-color bg-white md:text-white text-black py-2 px-4 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50"
               >
                 GET OTP

@@ -4,11 +4,15 @@ import { IoMdArrowDown } from "react-icons/io";
 import { RiInboxUnarchiveLine } from "react-icons/ri";
 import { HiOutlineInboxArrowDown } from "react-icons/hi2"
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../../context/authContext';
 function Buttons() {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth(); 
 
   const handleBuyClick = () => {
-    navigate("/details-form");
+    isAuthenticated?  navigate("/details-form"):
+    navigate('/login')
+  
   };
   return (
     <div className="flex  justify-center gap-2 xs:gap-4 items-center w-full h-auto xs:py-12 py-4">

@@ -1,23 +1,31 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import userImg from "../../assets/images/userImg.png";
-
+import { useAuth } from '../../context/authContext';
+import { useDispatch, useSelector } from 'react-redux';
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const navigate = useNavigate();
+  const location = useLocation(); // Get the current location
+  const { isAuthenticated,userName, logout} = useAuth();
+  
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const handleSignOut = () => {
+    logout();
+    navigate('/login'); // or navigate to any other page after logout
+  };
+
   const menuItems = [
-    { name: "Home", href: "/", current: true },
-    { name: "Exchange", href: "/exchange", current: false },
-    { name: "About", href: "#", current: false },
-    { name: "Market", href: "#", current: false },
-    { name: "Earn", href: "#", current: false },
-    { name: "Support", href: "#", current: false },
-    { name: "Sign Out", href: "#", current: false },
+    { name: "Home", href: "/", current: location.pathname === "/" },
+    { name: "Exchange", href: "/exchange", current: location.pathname === "/exchange" },
+    { name: "About", href: "#", current: location.pathname === "/about" },
+    { name: "Market", href: "#", current: location.pathname === "/market" },
+    { name: "Earn", href: "#", current: location.pathname === "/earn" },
+    { name: "Support", href: "#", current: location.pathname === "/support" },
   ];
 
   return (
@@ -32,16 +40,18 @@ function Header() {
             />
           </Link>
           <div className="flex items-center lg:order-2">
-            <div className="flex-row hidden sm:flex items-center gap-x-3 sm:gap-x-2">
-              <img src={userImg} alt="" />
-              <p className="text-white md:text-xl sm:text-base text-sm">
-                James
-              </p>
-            </div>
+         {isAuthenticated?(
+             <div className="flex-row hidden sm:flex items-center gap-x-3 sm:gap-x-2">
+             <img src={userImg} alt="" />
+             <p className="text-white md:text-xl sm:text-base text-sm">
+               {userName}
+             </p>
+           </div>
+         ):null}
             <button
               onClick={toggleMenu}
               type="button"
-              className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden  focus:outline-none"
+              className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden focus:outline-none"
               aria-controls="mobile-menu-2"
               aria-expanded={menuOpen}
             >
@@ -82,17 +92,34 @@ function Header() {
                 <li key={index} className="group">
                   <Link
                     to={item.href}
-                    className={`block py-2 pr-2 pl-3 font-normal text-white lg:p-0  lg:dark:hover:bg-transparent`}
+                    className={`block py-2 pr-2 pl-3 font-normal text-white lg:p-0 lg:dark:hover:bg-transparent`}
                   >
                     {item.name}
-                    {item.current ? (
-                      <div className="bg-gradient-to-r from-blue-300 via-purple-500 to-pink-500 h-[2px] w-full"></div>
-                    ) : (
-                      ""
+                    {item.current && (
+                      <div  style={{ transition: 'all 0.3s ease-in-out' }} className="bg-gradient-to-r from-blue-300 via-purple-500 to-pink-500 h-[2px] w-full"></div>
                     )}
                   </Link>
                 </li>
               ))}
+              {isAuthenticated ? (
+                <li className="group">
+                  <button
+                    onClick={handleSignOut}
+                    className="block py-2 pr-2 pl-3 font-normal text-white lg:p-0 lg:dark:hover:bg-transparent"
+                  >
+                    Sign Out
+                  </button>
+                </li>
+              ) : (
+                <li className="group">
+                  <Link
+                    to="/login"
+                    className="block py-2 pr-2 pl-3 font-normal text-white lg:p-0 lg:dark:hover:bg-transparent"
+                  >
+                    Sign In
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>
