@@ -23,7 +23,7 @@ export const signUpSchema = Yup.object({
 export const signInSchema = Yup.object({
   emailOrNumber: emailOrPhoneValidation,
   password: Yup.string().min(6).required("Please enter your password"),
-  otp: Yup.string().min(6).required("Please enter the otp"),
+  otp: Yup.string().min(5).required("Please enter the otp"),
 });
 
 export const detailsSchema = Yup.object().shape({

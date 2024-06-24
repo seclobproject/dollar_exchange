@@ -11,11 +11,14 @@ import authAPI from "../../apis/authApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useHandleGetOtp from "../../custom_hooks/useHandleGetOtp";
-const { sendOtp } = authAPI();
+import { useNavigate } from "react-router-dom"; 
+import {  useAuth} from '../../context/authContext'
+const { verifyOtp } = authAPI();
 
 function LoginComponent() {
-
-  const { showRequestButton, countdown, handleGetOtp } = useHandleGetOtp()
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const { showRequestButton, countdown, handleGetOtp } = useHandleGetOtp();
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -23,12 +26,22 @@ function LoginComponent() {
       validationSchema: signInSchema,
       onSubmit: async (values) => {
         try {
-        } catch (err) {}
+          const res = await verifyOtp({ otp: values.otp });
+          console.log(res.data);
+          const accessToken = res.data.accessToken;
+          
+          login(accessToken);
+          toast.success("you are verified", {
+            position: "top-center",
+          });
+          navigate('/');
+        } catch (err) {
+          toast.error("wrong otp or otp expired", {
+            position: "top-center",
+          });
+        }
       },
     });
-
-
-
 
   return (
     <div className="flex flex-row">
@@ -140,7 +153,7 @@ function LoginComponent() {
               <div className="mb-6 flex justify-between pt-2">
                 {showRequestButton ? (
                   <span
-                  onClick={() => handleGetOtp(values)}
+                    onClick={() => handleGetOtp(values)}
                     className="text-sm underline md:text-md md:font-medium font-normal md:text-gray-700 text-white cursor-pointer"
                   >
                     Get OTP

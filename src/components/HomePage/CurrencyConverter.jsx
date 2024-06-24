@@ -113,11 +113,11 @@ function CurrencyConverter() {
       </div>
       <div className="sm:text-lg mx-auto xs:mx-0 text-sm mt-2 flex flex-row text-gray-400">
         <p>
-          1 {fromCurrency} = {exchangeRate.toFixed(4)} {toCurrency}
+          1 {fromCurrency} = {exchangeRate?.toFixed(4)} {toCurrency}
         </p>
         <p className="px-6">|</p>
         <p>
-          1 {toCurrency} = {reverseExchangeRate.toFixed(4)} {fromCurrency}
+          1 {toCurrency} = {reverseExchangeRate?.toFixed(4)} {fromCurrency}
         </p>
       </div>
       <div className="text-gray-500 mt-4 xs:block hidden">
