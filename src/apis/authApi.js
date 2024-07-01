@@ -37,8 +37,7 @@ import axiosConfig from '../config/axiosConfig';
       return res.data;
     };
     const newPassword = async (data) => {
-    
-      console.log(data);
+ 
       const res = await axiosConfig.patch("/user/change-password",data);
       return res.data;
     };

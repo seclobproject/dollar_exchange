@@ -8,7 +8,8 @@ function Hero() {
   return (
     <div className="relative">
       <img src={img} alt="Background" className="w-full h-[160px] xs:h-[200px] sm:h-full" />
-      <div className="absolute inset-0 flex justify-center items-center">
+      <div className="absolute inset-0 flex justify-center items-center ">
+       
         <div className="relative">
           <img src={img2} alt="Overlay" className="w-3/5 md:w-3/5 lg:w-4/5 xl:w-full h-auto  mx-auto" />
           <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-4">

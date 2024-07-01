@@ -11,12 +11,13 @@ import Details from '../pages/Details';
 import PaymentPage from '../pages/PaymentPage';
 import PaymentSuccess from '../pages/PaymentSuccess';
 import Header from '../components/homePage/Header';
+import BuyingPage from '../pages/BuyingPage';
 import ErrorPage from '../pages/ErrorPage';
 import { useAuth } from '../context/authContext';
 import { PublicRoute, ProtectedRoute } from './routes';
 
 const AppContent = () => {
-  const { isLoading } = useAuth();
+ 
   const location = useLocation();
 
   const noHeaderPaths = [
@@ -40,6 +41,8 @@ const AppContent = () => {
         <Route path="/otp-verification" element={<PublicRoute component={OtpVerification} />} />
         <Route path="/new-password" element={<PublicRoute component={NewPassword} />} />
         <Route path="/exchange" element={<ProtectedRoute component={ExchangePage} />} />
+        <Route path="/buyingPage" element={<ProtectedRoute component={BuyingPage} />} />
+
         <Route path="/details-form" element={<ProtectedRoute component={Details} />} />
         <Route path="/payment" element={<ProtectedRoute component={PaymentPage} />} />
         <Route path="/payment-success" element={<ProtectedRoute component={PaymentSuccess} />} />

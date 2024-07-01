@@ -30,6 +30,9 @@ function FrgtPswrd() {
               : undefined,
           };
           const res = await forgotPassword(data);
+          console.log(res);
+          const id = res.userId
+          localStorage.setItem('userId',id);
           toast.success("Otp has send to your mail ", {
             position: "top-center",
           })

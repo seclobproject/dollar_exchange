@@ -43,12 +43,12 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (token) => {
+    setIsAuthenticated(true);
+    localStorage.setItem('accessToken', token);
     setAccessToken(token);
     const decodedToken = parseJwt(token);
     if (decodedToken) {
       setUserName(decodedToken.username);
-      localStorage.setItem('accessToken', token);
-      setIsAuthenticated(true);
     }
   };
 

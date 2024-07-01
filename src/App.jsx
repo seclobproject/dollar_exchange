@@ -18,7 +18,7 @@ const App = () => {
 const AuthLoader = ({ children }) => {
   const { isLoading } = useAuth();
   if (isLoading) {
-    return null; // Return null or any loading indicator you prefer
+    return null; // Return null or any loading 
   }
   return children;
 };

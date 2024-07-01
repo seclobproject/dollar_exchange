@@ -20,9 +20,13 @@ function NewPswrd() {
     validationSchema: newPasswordSchema,
     onSubmit: async (values,{resetForm}) => {
       try {
-        console.log(values);
-        const res = await newPassword(values);
-        resetForm();
+       
+        const userId=localStorage.getItem('userId')
+ 
+        const payload = { password: values.password, userId };
+   
+        const res = await newPassword(payload)      
+          resetForm();
         // Handle the form submission
       } catch (err) {
         // Handle the error

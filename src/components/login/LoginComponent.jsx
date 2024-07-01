@@ -42,6 +42,9 @@ function LoginComponent() {
         }
       },
     });
+    const handleClick = () => {
+      navigate('/forgot-password');
+    };
 
   return (
     <div className="flex flex-row">
@@ -161,7 +164,7 @@ function LoginComponent() {
                 ) : (
                   <span className="text-gray-500">{countdown} seconds</span>
                 )}
-                <span className="text-sm underline md:text-md md:font-medium font-normal md:text-gray-700 text-white cursor-pointer">
+                <span onClick={handleClick} className="text-sm underline md:text-md md:font-medium font-normal md:text-gray-700 text-white cursor-pointer">
                   Forgot Password
                 </span>
               </div>

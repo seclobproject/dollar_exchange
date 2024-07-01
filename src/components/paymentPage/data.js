@@ -4,8 +4,6 @@ export const personalDetailsFields = [
   { label: 'Company Name', type: 'text', name: 'company_name', placeholder: 'company name' },
   { label: 'Phone Number', type: 'text', name: 'phone_number', placeholder: 'Enter your phone number' },
   { label: 'Email Id', type: 'email', name: 'email_id', placeholder: 'Enter your Email' },
-  { label: 'Buy Quantity', type: '', name: 'buy_quantity', placeholder: 'Enter Buying Quantity' },
-  { label: 'Amount', type: 'text', name: 'amount', placeholder: 'Enter Amount' },
  
 ];
 
