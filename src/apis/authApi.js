@@ -41,7 +41,13 @@ import axiosConfig from '../config/axiosConfig';
       const res = await axiosConfig.patch("/user/change-password",data);
       return res.data;
     };
-    return { doSignup, sendOtp, verifyOtp,personalDetails,forgotPassword,confirmOtp ,newPassword};
+
+    const codDetails = async (data) => {
+      console.log(data);
+      const res = await axiosConfig.post("/user/placeOrder",data);
+      return res.data;
+    };
+    return { doSignup, sendOtp, verifyOtp,personalDetails,forgotPassword,confirmOtp ,newPassword,codDetails};
 }  
 
 export default authAPI

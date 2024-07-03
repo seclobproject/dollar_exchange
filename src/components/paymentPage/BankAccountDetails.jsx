@@ -1,22 +1,15 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
-import useConversionRate from "../../custom_hooks/useConversionRate";  // Import the custom hook
 import { bankDetailsFields, bankAccountFields } from "./data";
 import {bankDetailsInitialState,bankDetailsSchema} from '../../schemas'
 
-const BankAccountDetails = ({   handleData, handleBack,setBuyQuantity,setAmount,location,setLocationError}) => {
-  const conversionRate = useConversionRate("USDT", "AED");
-
+const BankAccountDetails = ({   handleData, handleBack}) => {
 
   const formik = useFormik({
     initialValues: bankDetailsInitialState,
     validationSchema: bankDetailsSchema,
     onSubmit: (values, { resetForm }) => {
-      if (!location) {
-        setLocationError("location", "Please select a location");
-        return;
-      }
+    
       handleData(values);
       resetForm();
     },
@@ -24,14 +17,7 @@ const BankAccountDetails = ({   handleData, handleBack,setBuyQuantity,setAmount,
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit, setFieldValue, isValid } = formik;
 
-  useEffect(() => {
-    if (conversionRate && values.buy_quantity) {
-      const convertedAmount = (values.buy_quantity * conversionRate).toFixed(2);
-      setFieldValue("amount", convertedAmount);
-      setBuyQuantity(values.buy_quantity);
-      setAmount(convertedAmount);
-    }
-  }, [conversionRate, values.buy_quantity, setFieldValue, setBuyQuantity, setAmount]);
+
 
   return (
     <form onSubmit={handleSubmit}>

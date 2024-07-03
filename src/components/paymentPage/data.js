@@ -18,8 +18,6 @@ export const bankDetailsFields = [
   { label: 'Beneficiary Name', type: 'text', name: 'account_holder_name', placeholder: 'Enter beneficiary name' },
   { label: 'Branch', type: 'text', name: 'branch_name', placeholder: 'Enter branch' },
   { label: 'IFSC Code', type: 'text', name: 'ifsc_code', placeholder: 'Enter IFSC code' },
-  { label: 'Buy Quantity', type: '', name: 'buy_quantity', placeholder: 'Enter buying quantity' },
-  { label: 'Amount', type: 'text', name: 'amount', placeholder: 'Enter amount' },
 ];
 
 export const bankAccountFields = [

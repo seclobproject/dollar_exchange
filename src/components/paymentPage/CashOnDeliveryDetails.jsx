@@ -1,43 +1,42 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
-import useConversionRate from "../../custom_hooks/useConversionRate";  // Import the custom hook
 import { personalDetailsFields, addressFields } from "./data";
-import {codInitialState,detailsSchema} from '../../schemas/index'
-const CashOnDeliveryDetails = ({handleData, handleBack,setBuyQuantity,setAmount,location,setLocationError}) => {
+import { codInitialState, detailsSchema } from "../../schemas/index";
 
-  const conversionRate = useConversionRate("USDT", "AED"); 
-  
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit, setFieldValue } = useFormik({
+const CashOnDeliveryDetails = ({
+  handleData,
+  handleBack,
+}) => {
+
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = useFormik({
     initialValues: codInitialState,
     validationSchema: detailsSchema,
     onSubmit: (values, { resetForm }) => {
-      if (!location) {
-        setLocationError("location", "Please select a location");
-        return;
-      }
-     
       handleData(values);
       resetForm();
     },
   });
-  
-  useEffect(() => {
-    if (conversionRate && values.buy_quantity) {
-      const convertedAmount = (values.buy_quantity * conversionRate).toFixed(2);
-      setFieldValue("amount", convertedAmount);
-      setBuyQuantity(values.buy_quantity);
-      setAmount(convertedAmount);
-    }
-  }, [conversionRate, values.buy_quantity, setFieldValue, setBuyQuantity, setAmount]);
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-wrap md:flex-nowrap">
         <div className="w-full md:w-1/2">
           {personalDetailsFields.map(({ label, type, name, placeholder }) => (
-            <div key={name} className="mb-4 flex flex-col md:items-start gap-y-1">
-              <label className="block text-sm font-normal mb-2 md:mb-0" htmlFor={name}>
+            <div
+              key={name}
+              className="mb-4 flex flex-col md:items-start gap-y-1"
+            >
+              <label
+                className="block text-sm font-normal mb-2 md:mb-0"
+                htmlFor={name}
+              >
                 {label}
               </label>
               <div className="md:w-2/3 relative">
@@ -50,13 +49,9 @@ const CashOnDeliveryDetails = ({handleData, handleBack,setBuyQuantity,setAmount,
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values[name]}
-                  readOnly={name === "amount"} // Make the amount field read-only
+                  readOnly={name === "amount"}
                 />
-                {(name === "buy_quantity" || name === "amount") && (
-                  <span className="absolute top-2 right-3 text-xs md:text-sm text-gray-300">
-                    {name === "buy_quantity" ? "USDT" : "AED"}
-                  </span>
-                )}
+
                 {touched[name] && errors[name] && (
                   <p className="form-error text-red-400">{errors[name]}</p>
                 )}
@@ -66,8 +61,14 @@ const CashOnDeliveryDetails = ({handleData, handleBack,setBuyQuantity,setAmount,
         </div>
         <div className="w-full md:w-1/2 mt-2 md:mt-0">
           {addressFields.map(({ label, type, name, placeholder, options }) => (
-            <div key={name} className="mb-4 flex flex-col md:items-start gap-y-1">
-              <label className="block text-sm font-normal mb-2 md:mb-0 md:w-1/3" htmlFor={name}>
+            <div
+              key={name}
+              className="mb-4 flex flex-col md:items-start gap-y-1"
+            >
+              <label
+                className="block text-sm font-normal mb-2 md:mb-0 md:w-1/3"
+                htmlFor={name}
+              >
                 {label}
               </label>
               <div className="md:w-2/3">
@@ -84,7 +85,11 @@ const CashOnDeliveryDetails = ({handleData, handleBack,setBuyQuantity,setAmount,
                       Select {label.toLowerCase()}
                     </option>
                     {options.map((option) => (
-                      <option key={option} value={option} className="bg-custom-blue text-gray-300">
+                      <option
+                        key={option}
+                        value={option}
+                        className="bg-custom-blue text-gray-300"
+                      >
                         {option}
                       </option>
                     ))}

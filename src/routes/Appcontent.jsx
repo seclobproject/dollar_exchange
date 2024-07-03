@@ -13,6 +13,7 @@ import PaymentSuccess from '../pages/PaymentSuccess';
 import Header from '../components/homePage/Header';
 import BuyingPage from '../pages/BuyingPage';
 import ErrorPage from '../pages/ErrorPage';
+import OrderStatus from '../pages/OrderStatus';
 import { useAuth } from '../context/authContext';
 import { PublicRoute, ProtectedRoute } from './routes';
 
@@ -41,11 +42,13 @@ const AppContent = () => {
         <Route path="/otp-verification" element={<PublicRoute component={OtpVerification} />} />
         <Route path="/new-password" element={<PublicRoute component={NewPassword} />} />
         <Route path="/exchange" element={<ProtectedRoute component={ExchangePage} />} />
-        <Route path="/buyingPage" element={<ProtectedRoute component={BuyingPage} />} />
+        <Route path="/buyingPage" element={<BuyingPage/>}  />
 
         <Route path="/details-form" element={<ProtectedRoute component={Details} />} />
         <Route path="/payment" element={<ProtectedRoute component={PaymentPage} />} />
         <Route path="/payment-success" element={<ProtectedRoute component={PaymentSuccess} />} />
+        <Route path="/order-status" element={<ProtectedRoute component={OrderStatus} />} />
+
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

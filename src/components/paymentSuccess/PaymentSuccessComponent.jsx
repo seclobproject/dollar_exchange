@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import successImg from "../../assets/images/successImg.png";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const PaymentSuccessPage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { serviceFee, orderDetails, paymentMethod } = location.state || {};
+
+  useEffect(() => {
+    if (!location.state) {
+      alert("Please fill required details.");
+      navigate("/payment");
+    }
+  }, [navigate, location.state]);
+
+  if (!location.state) {
+    return null; // Return null to prevent rendering if state is not defined
+  }
+
   return (
     <div className="bg-custom-blue mt text-white min-h-screen flex flex-col justify-start items-center gap-y-8 px-4 sm:px-6 lg:px-8">
       <img src={successImg} alt="Success" className="h-16 sm:h-20" />
@@ -13,24 +29,28 @@ const PaymentSuccessPage = () => {
         </p>
       </div>
 
-      <div className="text-center">
-        <p className="text-sm sm:text-base">Recipient amount</p>
-        <p className="text-lg sm:text-xl font-semibold">3119.5 AED</p>
+      <div className="text-center ">
+        <p className="text-sm sm:text-lg">Buying quantity</p>
+        <p className="text-lg sm:text-xl font-semibold mt-2">{orderDetails?.buyQuantity} USDT</p>
       </div>
 
       <div className="text-gray-300 w-full max-w-sm sm:max-w-md">
         <div className="flex flex-col gap-y-2">
           <div className="flex flex-row justify-between">
+            <p className="font-medium">Order Number:</p>
+            <p>o0998097987iuhkj</p>
+          </div>
+          <div className="flex flex-row justify-between">
             <p className="font-medium">Payment Method:</p>
-            <p>Banking</p>
+            <p>{paymentMethod}</p>
           </div>
           <div className="flex flex-row justify-between">
             <p className="font-medium">Indicated Amount:</p>
-            <p>3119.5 AED</p>
+            <p>{orderDetails?.amount} {orderDetails?.currency}</p>
           </div>
           <div className="flex flex-row justify-between">
             <p className="font-medium">Transaction Fee:</p>
-            <p>0.00 AED</p>
+            <p>{serviceFee}</p>
           </div>
         </div>
       </div>

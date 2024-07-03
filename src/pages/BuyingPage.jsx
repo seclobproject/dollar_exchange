@@ -9,3 +9,5 @@ function BuyingPage() {
 }
 
 export default BuyingPage
+
+

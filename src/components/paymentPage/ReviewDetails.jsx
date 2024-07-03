@@ -1,17 +1,24 @@
 import React, { useState } from "react";
-import FinalPaymentDetails from "./FinalPaymentDetails";
-
-const ReviewDetails = ({ fields, paymentMethod, handleBack, setCurrentStep }) => {
+import PaymentSuccess from './PaymentStatus'
+import { useNavigate } from "react-router-dom";
+const ReviewDetails = ({ fields, paymentMethod, handleBack, setCurrentStep,orderDetails }) => {
+  const navigate=useNavigate()
+  console.log(orderDetails);
   const [showPaymentDetails, setShowPaymentDetails] = useState(false);
 
   const handleContinue = () => {
-    setShowPaymentDetails(true);
-    setCurrentStep(3);
+    navigate("/payment-success", {
+      state: {
+        serviceFee: 0,
+        orderDetails,
+        fields,
+        paymentMethod,
+      },
+    })
+    // setCurrentStep(3);
   };
 
-  const handlePay = () => {
-    alert("Payment process initiated.");
-  };
+;
 
   const handleBackToReview = () => {
     setShowPaymentDetails(false);
@@ -26,7 +33,7 @@ const ReviewDetails = ({ fields, paymentMethod, handleBack, setCurrentStep }) =>
   if (showPaymentDetails) {
     return (
       <>
-        <FinalPaymentDetails
+        <PaymentSuccess
           serviceFee={0}
           totalPayment={3119.5}
           handlePay={handlePay}
@@ -55,10 +62,10 @@ const ReviewDetails = ({ fields, paymentMethod, handleBack, setCurrentStep }) =>
               <div>{fields.ifsc_code}</div>
 
               <div className="text-start">Buy Quantity:</div>
-              <div>{fields.buy_quantity}</div>
+              <div>{orderDetails.buyQuantity}</div>
 
               <div className="text-start">Amount:</div>
-              <div>{fields.amount}</div>
+              <div>{orderDetails.amount}</div>
 
               <div className="text-start">Bank Name:</div>
               <div>{fields.bank_name}</div>
@@ -87,10 +94,10 @@ const ReviewDetails = ({ fields, paymentMethod, handleBack, setCurrentStep }) =>
               <div>{fields.full_address}</div>
 
               <div className="text-start">Quantity:</div>
-              <div>{fields.buy_quantity}</div>
+              <div>{orderDetails.buyQuantity}</div>
 
               <div className="text-start">Amount:</div>
-              <div>{fields.amount}</div>
+              <div>{orderDetails.amount}{"  "}{orderDetails.currency}</div>
             </>
           )}
         </div>

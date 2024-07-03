@@ -9,7 +9,7 @@ const CustomDropdown = ({ options, selectedValue, onValueChange, getFlagUrl }) =
   };
 
   return (
-    <div className="relative inline-block w-full">
+    <div className="relative h-10 inline-block w-full">
       <span
         className="appearance-none bg-custom-blue w-full lg:w-72 md:w-64 py-2 pl-3 pr-10 text-base leading-6 border border-gray-300 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5 flex items-center"
         onClick={() => setIsOpen(!isOpen)}
