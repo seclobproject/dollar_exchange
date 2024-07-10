@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import CustomDropdown from './CustomDropdown';
 import { useNavigate } from "react-router-dom";
-
+import { useAuth } from "../../context/authContext";
 const CURRENCIES_URL = import.meta.env.VITE_CURRENCIES_URL;
 const CONVERT_URL = import.meta.env.VITE_CURRENCY_CONVERT_URL;
 
 function BuyComponent() {
+  const { action } = useAuth();
   const navigate = useNavigate();
   const [currencyOptions, setCurrencyOptions] = useState({});
   const [fromCurrency, setFromCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("AED");
   const [exchangeRate, setExchangeRate] = useState(null);
   const [lastUpdated, setLastUpdated] = useState("");
-  const [amount, setAmount] = useState(10);
+  const [quantity, setQuantity] = useState(10);
   const [error, setError] = useState(false);
-
   useEffect(() => {
     const fetchCurrencies = async () => {
       try {
@@ -54,20 +54,21 @@ function BuyComponent() {
   }, [fromCurrency, toCurrency]);
 
   const handleAmountChange = (e) => {
-    setAmount(e.target.value);
+    setQuantity(e.target.value);
     setError(false); 
   };
 
   const handlePayment = () => {
-    if (!amount) {
+    if (!quantity) {
       setError(true);
     } else {
       setError(false);
       navigate('/payment', {
         state: {
-          amount,
-          exchangeRate: (amount * exchangeRate).toFixed(4),
-          toCurrency
+          quantity,
+          totalAmount: (quantity * exchangeRate).toFixed(4),
+          toCurrency,
+          exchangeRate:exchangeRate
         }
       });
     }
@@ -82,7 +83,8 @@ function BuyComponent() {
       <hr className="h-px bg-gray-200 border-0" />
       <div className="flex flex-col xs:gap-y-8 gap-y-6 lg:px-24 md:px-12 px-6 text-white">
         <span className="xl:text-3xl md:text-xl lg:text-2xl text-lg underline py-4 xs:py-6 text-white underline-offset-8">
-          Buying Currency
+        {`${action === 'buy' ? 'Buying Currency' : 'Selling Currency'}`}
+
         </span>
         <div className="flex sm:flex-row flex-col gap-x-10 gap-y-16">
           <div className="flex flex-col gap-y-4 h-10 text-white items-start justify-between">
@@ -90,14 +92,14 @@ function BuyComponent() {
             <input
               className="appearance-none text-xs xs:text-sm sm:text-base bg-custom-blue w-full lg:w-72 md:w-64 py-2 pl-3 pr-10 leading-6 border border-gray-300 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:leading-5 flex items-center"
               type="number"
-              value={amount}
+              value={quantity}
               onChange={handleAmountChange}
             />
             {error && <span className="-mt-4 text-red-400 text-xs xs:text-sm">Please choose the quantity</span>}
           </div>
           
           <div className="flex flex-col gap-y-4 text-white items-start justify-between">
-            <span className="xs:text-lg text-md">From</span>
+            <span className="xs:text-lg text-md">     {`${action === 'buy' ? 'From' : 'To'}`}</span>
             <CustomDropdown
               options={currencyOptions}
               selectedValue={toCurrency}
@@ -110,7 +112,7 @@ function BuyComponent() {
         {exchangeRate ? (
           <>
             <span className="xs:text-lg text-md">
-              {amount} USD = {(amount * exchangeRate).toFixed(4)} {toCurrency}
+              {quantity} USD = {(quantity * exchangeRate).toFixed(4)} {toCurrency}
             </span>
             <p className="xs:text-sm text-xs">Last Updated: {lastUpdated}</p>
           </>

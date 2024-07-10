@@ -14,6 +14,7 @@ export default {
          'form-color':'#FAFAFA',
          'button-color':'#212121',
          'custom-green':"#00B56E"
+         
       },
       backgroundImage: {
         'custom-gradient': 'linear-gradient(90deg, #5FD8FF 0%, #9969FF 50%, #FF4B4B 100%)',

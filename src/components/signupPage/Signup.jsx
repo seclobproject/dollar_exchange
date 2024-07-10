@@ -45,9 +45,29 @@ function SignUp() {
             }
           );
         } catch (err) {
-          toast.error("Sign up failed", {
-            position: "top-center",
-          });
+          if (err.response) {
+            const status = err.response.status;
+            if (status === 400) {
+              toast.error(err.response.data.message, {
+                position: "top-center",
+              });
+            } else if (status === 500) {
+              toast.error("Server error. Please try again later.", {
+                position: "top-center",
+              });
+            } else {
+              toast.error("Sign up failed. Please try again.", {
+                position: "top-center",
+              });
+            }
+          } else {
+            toast.error(
+              "Sign up failed. Please check your internet connection.",
+              {
+                position: "top-center",
+              }
+            );
+          }
         }
       },
     });

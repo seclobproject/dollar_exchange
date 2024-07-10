@@ -1,47 +1,44 @@
 import React, { useState } from "react";
-import PaymentSuccess from './PaymentStatus'
+import PaymentSuccess from "./PaymentStatus";
 import { useNavigate } from "react-router-dom";
-const ReviewDetails = ({ fields, paymentMethod, handleBack, setCurrentStep,orderDetails }) => {
-  const navigate=useNavigate()
-  console.log(orderDetails);
-  const [showPaymentDetails, setShowPaymentDetails] = useState(false);
+const ReviewDetails = ({ data, action, handleBack, setCurrentStep }) => {
+  const navigate = useNavigate();
+  let orderDetails;
+  let orderId;
+  let quantity;
+  if (action === "buy") {
+    orderDetails = data?.orderDetails;
+    orderId = data?.orderId;
+    quantity = orderDetails.buyQuantity;
+  } else if (action === "sell") {
+    orderDetails = data?.ExchangeDetails;
+    orderId = data?.exchangeId;
+    quantity = orderDetails.SellQuantity;
+  }
+  const paymentMethod = data.paymentMethod;
+
 
   const handleContinue = () => {
     navigate("/payment-success", {
       state: {
         serviceFee: 0,
         orderDetails,
-        fields,
         paymentMethod,
+        orderId,
+        quantity,
       },
-    })
+    });
     // setCurrentStep(3);
   };
 
-;
 
-  const handleBackToReview = () => {
-    setShowPaymentDetails(false);
-    setCurrentStep(2);
-  };
 
   const maskAccountNumber = (accountNumber) => {
     const maskedLength = accountNumber.length - 4;
-    return '*'.repeat(maskedLength) + accountNumber.slice(maskedLength);
+    return "*".repeat(maskedLength) + accountNumber.slice(maskedLength);
   };
 
-  if (showPaymentDetails) {
-    return (
-      <>
-        <PaymentSuccess
-          serviceFee={0}
-          totalPayment={3119.5}
-          handlePay={handlePay}
-          handleBackToReview={handleBackToReview}
-        />
-      </>
-    );
-  }
+
 
   return (
     <>
@@ -79,25 +76,29 @@ const ReviewDetails = ({ fields, paymentMethod, handleBack, setCurrentStep,order
           ) : (
             <>
               <div className="text-start">Company Name:</div>
-              <div>{fields.company_name}</div>
+              <div>{data?.codDetails?.companyName}</div>
 
               <div className="text-start">Phone Number:</div>
-              <div>{fields.phone_number}</div>
+              <div>{data?.codDetails?.phoneNumber}</div>
 
               <div className="text-start">Email Id:</div>
-              <div>{fields.email_id}</div>
+              <div>{data?.codDetails?.emailId}</div>
 
               <div className="text-start">Country:</div>
-              <div>{fields.country}</div>
+              <div>{data?.codDetails?.country}</div>
 
               <div className="text-start">Full Address:</div>
-              <div>{fields.full_address}</div>
+              <div>{data?.codDetails?.fullAddress}</div>
 
               <div className="text-start">Quantity:</div>
-              <div>{orderDetails.buyQuantity}</div>
+              <div>{quantity}</div>
 
               <div className="text-start">Amount:</div>
-              <div>{orderDetails.amount}{"  "}{orderDetails.currency}</div>
+              <div>
+                {orderDetails?.Totalamount}
+                {"  "}
+                {orderDetails?.currency}
+              </div>
             </>
           )}
         </div>

@@ -27,7 +27,6 @@ function LoginComponent() {
       onSubmit: async (values) => {
         try {
           const res = await verifyOtp({ otp: values.otp });
-          console.log(res.data);
           const accessToken = res.data.accessToken;
           
           login(accessToken);

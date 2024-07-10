@@ -1,25 +1,24 @@
-import React from "react";
-import { FcGoogle } from "react-icons/fc";
-import { BsFacebook } from "react-icons/bs";
-import { IoLogoApple } from "react-icons/io5";
+import React, { useState } from "react";
 import img from "../../assets/images/authenticationPageImgs/frgt-password-lg.png";
 import img2 from "../../assets/images/logo.png";
-import Mobileimg from "../../assets/images/authenticationPageImgs/frgt-pswrd-sm.png";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { forgotPasswordSchema } from "../../schemas";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SocailMediaButtons from "../socialMediaButtons/SocailMediaButtons";
+import SocialMediaButtonsSm from "../socialMediaButtons/SocialMediaButtonsSm";
 import authAPI from "../../apis/authApi";
 const { forgotPassword } = authAPI();
 function FrgtPswrd() {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: { emailOrNumber: "" },
       validationSchema: forgotPasswordSchema,
       onSubmit: async (values) => {
-        console.log(values);
+        setLoading(true);
         try {
           const data = {
             email: values.emailOrNumber.includes("@")
@@ -30,25 +29,26 @@ function FrgtPswrd() {
               : undefined,
           };
           const res = await forgotPassword(data);
-          console.log(res);
-          const id = res.userId
-          localStorage.setItem('userId',id);
+          const id = res.userId;
+          localStorage.setItem("userId", id);
           toast.success("Otp has send to your mail ", {
             position: "top-center",
-          })
-          setTimeout(() => {
-            navigate("/otp-verification");
-          }, 2500);
-
-       
-
-          
-        } catch (err) {
-          console.log(err);
-          // Handle the error
-          toast.error("please try again", {
-            position: "top-center",
           });
+          setTimeout(() => {
+            navigate("/otp-verification", {
+              state: {
+                userData: data,
+              },
+            });
+          }, 2500);
+        } catch (err) {
+          if (err) {
+            toast.error(err.response.data.message, {
+              position: "top-center",
+            });
+          }
+        } finally {
+          setLoading(false);
         }
       },
     });
@@ -58,7 +58,7 @@ function FrgtPswrd() {
 
   return (
     <div className="flex flex-row">
-     <ToastContainer />
+      <ToastContainer />
       <img
         src={img}
         alt=""
@@ -113,62 +113,40 @@ function FrgtPswrd() {
               </div>
               <button
                 type="submit"
-                // onClick={handleOtp}
                 className="w-full font-medium md:bg-button-color bg-white md:text-white text-black py-2 px-4 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50"
+                disabled={loading}
               >
-                GET OTP
+                {loading ? (
+                  <div className="flex items-center justify-center">
+                    <svg
+                      className="animate-spin h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                  </div>
+                ) : (
+                  "GET OTP"
+                )}
               </button>
             </form>
           </div>
-          <div className="hidden md:block mt-6">
-            <div className="flex items-center my-4">
-              <div className="flex-grow border-t border-gray-300"></div>
-              <span className="mx-2 text-gray-500">or</span>
-              <div className="flex-grow border-t border-gray-300"></div>
-            </div>
-            <div className="space-y-4">
-              <button className="flex items-center justify-center w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50">
-                <FcGoogle className="mr-2" /> Sign up with Google
-              </button>
-              <button className="flex items-center justify-center w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50">
-                <BsFacebook className="mr-2 text-blue-600" /> Sign up with
-                Facebook
-              </button>
-              <button className="flex items-center justify-center w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:ring-opacity-50">
-                <IoLogoApple className="mr-2" /> Sign up with Apple
-              </button>
-            </div>
-            <div className="mt-6 text-center mb-2">
-              <p className="text-gray-700">
-                Already have an account?{" "}
-                <a
-                  href="#"
-                  className="text-button-color font-bold hover:underline"
-                >
-                  LOGIN HERE
-                </a>
-              </p>
-            </div>
-          </div>
-          <div className="md:hidden mt-6 flex flex-col items-center">
-            <img src={Mobileimg} className="mx-auto w-auto h-auto" alt="" />
-            <p className="text-gray-300 text-sm sm:text-md mt-3 mb-2">
-              Already have an account?{" "}
-              <a href="#" className="text-blue-500 font-normal hover:underline">
-                Login
-              </a>
-            </p>
-            <p className="text-gray-300 text-sm sm:text-md mb-2">
-              <a href="#" className="font-normal hover:underline">
-                Or Login with
-              </a>
-            </p>
-            <div className="flex justify-between gap-x-6 py-3 px-6">
-              <FcGoogle className="text-2xl px-1 bg-white rounded-md text-gray-700 hover:text-gray-900 cursor-pointer" />
-              <BsFacebook className="text-2xl px-1 bg-white rounded-md hover:text-gray-900 cursor-pointer" />
-              <IoLogoApple className="text-2xl px-1 bg-white rounded-md hover:text-gray-900 cursor-pointer" />
-            </div>
-          </div>
+          <SocailMediaButtons />
+          <SocialMediaButtonsSm />
         </div>
       </div>
     </div>

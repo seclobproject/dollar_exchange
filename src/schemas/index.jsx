@@ -85,4 +85,32 @@ export const bankDetailsSchema = Yup.object().shape({
 });
 
 
+export const userDetailsSchema = Yup.object().shape({
+
+
+  name: Yup.string().min(2).max(25).required("Please enter your name"),
+  nickname: Yup.string().min(2).max(25).required("Please enter your date of birth"),
+  dateOfBirth: Yup.date().required("Please enter your date of birth"),
+  gender: Yup.string().required("Please select your gender"),
+  maritalStatus: Yup.string().required("Please select your marital status"),
+  idCardNo: Yup.string().required("Please enter your ID card number"),
+  email: Yup.string()
+    .email("Invalid email format")
+    .required("Please enter your email"),
+    mobileNumber: Yup.string()
+    .matches(/^\d{10}$/, "Invalid mobile number")
+    .required("Please enter your mobile number"),
+  country: Yup.string().required("Please select your country"),
+  address: Yup.string().required("Please enter your address"),
+  bankName: Yup.string().required("Please enter your bank name"),
+  branchName: Yup.string().required("Please enter your branch name"),
+  accountNo: Yup.string().required("Please enter your account number"),
+  vaultizoUserId: Yup.string().required("Please enter your user ID"),
+  accountCreationDate: Yup.date().required(
+    "Please enter account creation date"
+  ),
+  vaultizoReferralCode: Yup.string(),
+});
+
+
 

@@ -1,19 +1,13 @@
 import axiosConfig from '../config/axiosConfig';
  const authAPI = () => {
     const doSignup = async (data) => {
-      const res = await axiosConfig.post("/user/register",data,{headers:{
-        'Content-Type': 'application/json',
-      }});
+      const res = await axiosConfig.post("/user/register",data);
 
     return res.data;
     };
   
     const sendOtp = async (data) => {
-      const res = await axiosConfig.post("/user/login",data,{
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const res = await axiosConfig.post("/user/login",data);
       return res;
     };
     const verifyOtp = async (data) => {
@@ -42,12 +36,8 @@ import axiosConfig from '../config/axiosConfig';
       return res.data;
     };
 
-    const codDetails = async (data) => {
-      console.log(data);
-      const res = await axiosConfig.post("/user/placeOrder",data);
-      return res.data;
-    };
-    return { doSignup, sendOtp, verifyOtp,personalDetails,forgotPassword,confirmOtp ,newPassword,codDetails};
+
+    return { doSignup, sendOtp, verifyOtp,personalDetails,forgotPassword,confirmOtp ,newPassword};
 }  
 
 export default authAPI

@@ -14,6 +14,7 @@ import Header from '../components/homePage/Header';
 import BuyingPage from '../pages/BuyingPage';
 import ErrorPage from '../pages/ErrorPage';
 import OrderStatus from '../pages/OrderStatus';
+import Wallet from '../pages/Wallet';
 import { useAuth } from '../context/authContext';
 import { PublicRoute, ProtectedRoute } from './routes';
 
@@ -48,6 +49,8 @@ const AppContent = () => {
         <Route path="/payment" element={<ProtectedRoute component={PaymentPage} />} />
         <Route path="/payment-success" element={<ProtectedRoute component={PaymentSuccess} />} />
         <Route path="/order-status" element={<ProtectedRoute component={OrderStatus} />} />
+        <Route path="/wallet" element={<ProtectedRoute component={Wallet} />} />
+
 
         <Route path="*" element={<ErrorPage />} />
       </Routes>

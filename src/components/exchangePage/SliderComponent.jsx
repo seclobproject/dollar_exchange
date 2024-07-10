@@ -71,11 +71,11 @@ function SliderComponent() {
               <div className="flex flex-row justify-start items-center gap-x-2">
                 <img src={img} alt="" className="w-8 h-8 xxss:w-auto" />
                 <div className="text-sm xxss:text-md xs:text-lg sm:text-xl text-gray-400 font-bold">
-                  {usdRates[currency].toFixed(2)} USDT
+                 {usdRates[currency].toFixed(2)}  {currency}
                 </div>
               </div>
               <div className="flex flex-col items-start justify-center">
-                <span className="text-white  xxss:text-md text-xs font-medium">
+                <span className="text-white xxss:text-md text-xs font-medium">
                   {currency}/USDT
                 </span>
                 <span className="text-gray-400 text-[9px] xxss:text-xs xs:text-sm">

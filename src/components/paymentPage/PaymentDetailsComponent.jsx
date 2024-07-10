@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, act } from "react";
 import PaymentStatus from "./PaymentStatus";
 import RadioButtons from "./RadioButtons";
 import BankAccountDetails from "./BankAccountDetails";
@@ -6,10 +6,14 @@ import CashOnDeliveryDetails from "./CashOnDeliveryDetails";
 import ReviewDetails from "./ReviewDetails";
 import { useLocation, useNavigate } from "react-router-dom";
 import useGetLocation from "../../custom_hooks/useGetLocation";
-import authAPI from "../../apis/authApi";
-const { codDetails } = authAPI();
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import orderAPI from "../../apis/orderApi";
+import { useAuth } from "../../context/authContext";
+const { codBuying, codSelling } = orderAPI();
 
 function PaymentDetailsComponent() {
+  const { action } = useAuth();
   const [paymentMethod, setPaymentMethod] = useState("Cash on delivery");
   const [isReview, setIsReview] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -19,29 +23,33 @@ function PaymentDetailsComponent() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  //show alert if quantity and amount not selected in buyingPage
-  const { amount, exchangeRate, toCurrency } = location.state || {};
+
+
+
+  //show  if quantity and amount not selected in buyingPage
+  const { quantity, totalAmount, toCurrency, exchangeRate } =
+    location.state || {};
   useEffect(() => {
-    if (!amount || !exchangeRate || !toCurrency) {
-      alert("Please select a quantity and exchange rate.");
-      navigate("/buyingPage");
+    if (!quantity || !exchangeRate || !toCurrency) {
+          toast.error("Please select a quantity and exchange rate.", {
+        position: "top-center",
+        autoClose: 1500,
+        onClose: () => navigate('/buyingPage')
+      });
     }
-  }, [amount, exchangeRate, toCurrency, navigate]);
-  
-  const orderDetails = {
-    buyQuantity: amount,
-    amount: parseFloat(exchangeRate),
+  }, [quantity, exchangeRate, toCurrency, navigate]);
+
+  const orderData = {
+    [action === "buy" ? "buyQuantity" : "SellQuantity"]: quantity,
+    amount: exchangeRate,
     currency: toCurrency,
+    Totalamount: parseFloat(totalAmount),
   };
+
   const handleData = async (data) => {
-    setDetails(data);
-
     if (userLocation?.coordinates?.lat && userLocation?.coordinates?.lng) {
-      setIsReview(true);
-      setCurrentStep(2);
-
       const allDetails = {
-        orderDetails,
+        [action === "buy" ? "orderDetails" : "ExchangeDetails"]: orderData,
         paymentMethod,
         codDetails:
           paymentMethod === "Cash on delivery"
@@ -75,9 +83,17 @@ function PaymentDetailsComponent() {
       };
 
       try {
-        const response = await codDetails(allDetails);
-        if (response.data.success) {
-          console.log("Order successfully created");
+        let response;
+        if (action === "buy") {
+          response = await codBuying(allDetails);
+        } else if (action === "sell") {
+          response = await codSelling(allDetails);
+        }
+
+        if (response.success) {
+          setDetails(response.data);
+          setIsReview(true);
+          setCurrentStep(2);
         } else {
           console.error("Failed to create order");
         }
@@ -85,7 +101,9 @@ function PaymentDetailsComponent() {
         console.error("Error creating order:", error);
       }
     } else {
-      alert("Fetching user location. Please wait.");
+      toast.error("Fetching user location. Please wait.", {
+        position: "top-center",
+      });
     }
   };
 
@@ -95,6 +113,7 @@ function PaymentDetailsComponent() {
   };
   return (
     <div>
+      <ToastContainer />
       <hr className="h-px bg-gray-200 border-0" />
       <div className="bg-custom-blue min-h-screen xl:pl-24 lg:pl-12 md:pl-8 flex flex-col">
         <div className="w-full md:w-2/3 flex flex-col">
@@ -105,10 +124,10 @@ function PaymentDetailsComponent() {
 
           <div className="flex px-6 xs:my-4 my-2 flex-col gap-y-4  justify-center items-start">
             <span className="text-white md:text-lg text-md xs:text-md">
-              Buying Quantity
+            {action === 'buy' ? 'Buying Quantity' : 'Selling Quantity'}
             </span>
             <div className="text-center font-medium text-black xs:text-md text-sm  bg-gray-400 rounded-md xs:w-72 w-2/3 xxss:py-2 py-0">
-              {amount} USDT
+              {quantity} USDT
             </div>
           </div>
 
@@ -138,11 +157,10 @@ function PaymentDetailsComponent() {
             </div>
           ) : (
             <ReviewDetails
-              fields={details}
-              paymentMethod={paymentMethod}
+              data={details}
+              action={action}
               handleBack={handleBack}
               setCurrentStep={setCurrentStep}
-              orderDetails={orderDetails}
             />
           )}
         </div>
